@@ -1,16 +1,25 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+
+<h1> Ruoan nimi </h1>
+
+<h3> Tarvikkeet </h3>
+
+<ul class="list-unstyled"> 
+    <li>2dl vehnäjauhoja</li>
+    <li>5dl maitoa</li>
+    <li>2 kananmunaa</li>
+    <li>2tl suolaa</li>
+    <li>2tl paprikajauhetta</li>
+    <li>1tl chilijauhetta</li>
+</ul>
+
+<h3>Ohjeet</h3>
+<p>Tässä kohtaa sitten kerrotaan kivasti miten ainesosista pitäisi saada jotain tehdyksi. </p>
+
+<p>Tänne tulee sitten kivasti kommenttiosio. </p>
+
+
+<h3>Kommentit</h3>
+
+{% endblock %}

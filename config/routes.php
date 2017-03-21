@@ -8,14 +8,14 @@
     HelloWorldController::sandbox();
   });
 
-   $routes->get('/kategoriat', function() {
+   $routes->get('/categories', function() {
     HelloWorldController::kategorialistaus();
   });
 
- $routes->get('/lisaaresepti', function() {
+ $routes->get('/addreceipe', function() {
     HelloWorldController::reseptinlisays();
   });
 
- $routes->get('/reseptisivu', function() {
+ $routes->get('/receipepage', function() {
     HelloWorldController::reseptisivu();
   });

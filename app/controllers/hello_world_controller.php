@@ -13,18 +13,18 @@
     }
       
     public static function etusivu() {
-        View::make('suunnitelmat/etusivu.html');
+        View::make('suunnitelmat/index.html');
     }
     
     public static function kategorialistaus() {
-        View::make('suunnitelmat/kategorialistaussivu.html');
+        View::make('suunnitelmat/categories.html');
     }  
     
     public static function reseptinlisays() {
-        View::make('suunnitelmat/reseptinlisays.html');
+        View::make('suunnitelmat/addreceipe.html');
     }  
       
     public static function reseptisivu() {
-        View::make('suunnitelmat/reseptisivu.html');
+        View::make('suunnitelmat/receipepage.html');
     }
   }

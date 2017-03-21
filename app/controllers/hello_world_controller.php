@@ -35,4 +35,8 @@
     public static function register() {
         View::make('register.html');
     } 
+      
+    public static function addreceipe() {
+        View::make('addreceipe.html');
+    }  
   }

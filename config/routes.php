@@ -19,3 +19,11 @@
  $routes->get('/receipepage', function() {
     HelloWorldController::reseptisivu();
   });
+
+$routes->get('/login', function() {
+    HelloWorldController::login();
+});
+
+$routes->get('/register', function() {
+    HelloWorldController::register();
+});

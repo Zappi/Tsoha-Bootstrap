@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="inlinedh1">Tee uusi käyttäjä</h1>
+
+<form>
+    
+    <div class="form-group">
+    
+        <label>Anna käyttäjätunnus</label>
+        <input type="text" class="form-control">
+    </div>
+    <div class="form-group">
+
+        <label>Anna salasana</label>
+        <input type="password" class="form-control">
+    </div>
+    
+    <div class="form-group">
+
+        <label>Anna salasana uudelleen</label>
+        <input type="password" class="form-control">
+    </div>
+    
+    <div class="form-group">
+        <label>Anna sähköpostiosoite</label>
+        <input type="email" class="form-control">
+    </div>    
+    
+    <button type="submit" class="btn btn-success">Rekisteröidy</button>
+    
+</form>
+
+{% endblock %}

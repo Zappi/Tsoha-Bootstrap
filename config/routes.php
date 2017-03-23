@@ -1,7 +1,7 @@
 <?php
 
   $routes->get('/', function() {
-    HelloWorldController::etusivu();
+    HelloWorldController::home();
   });
 
   $routes->get('/hiekkalaatikko', function() {
@@ -9,15 +9,15 @@
   });
 
    $routes->get('/categories', function() {
-    HelloWorldController::kategorialistaus();
+    HelloWorldController::categorylisting();
   });
 
  $routes->get('/addreceipe', function() {
-    HelloWorldController::reseptinlisays();
+    HelloWorldController::addreceipe();
   });
 
  $routes->get('/receipepage', function() {
-    HelloWorldController::reseptisivu();
+    HelloWorldController::receipepage();
   });
 
 $routes->get('/login', function() {
@@ -26,8 +26,4 @@ $routes->get('/login', function() {
 
 $routes->get('/register', function() {
     HelloWorldController::register();
-});
-
-$routes->get('/addreceipe', function() {
-    HelloWorldController::addreceipe();
 });

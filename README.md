@@ -18,3 +18,4 @@ Työn aiheena on tehdä sivusto, johon käyttäjät voivat lisätä omia ruokare
 -[Sisäänkirjautuminen](http://jtamland.users.cs.helsinki.fi/reseptisivusto/login/)
 -[Rekisteröitymissivu](http://jtamland.users.cs.helsinki.fi/reseptisivusto/register/)
 
+!En saanut deployatua uusia sivujen nimiä 23.3 illalla, sillä VPN-yhteys ei jostain syystä toiminut, mutta kaikki paitsi reseptisivu ovat jo näkyvillä sivullani. Deployaan uudet sivujen nimet luultavasti jo heti huomenna perjantaina.

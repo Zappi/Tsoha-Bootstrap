@@ -2,7 +2,7 @@
 
 class Recipe extends BaseModel {
     
-    public $id, $member_id, $category_id, $name, $method, $addTime, $username;
+    public $id, $member_id, $category_id, $name, $method,$username;
     //Konstruktori
     public function __construct($attributes) {
         parent::__construct($attributes); 
@@ -25,7 +25,6 @@ class Recipe extends BaseModel {
                 'category_id' => $row['category_id'],
                 'name' => $row['name'],
                 'method' => $row['method'],
-                'addTime' => $row['addTime'],
                 'username' => $row['username']
             ));
         }
@@ -44,7 +43,6 @@ class Recipe extends BaseModel {
                 'category_id' => $row['category_id'],
                 'name' => $row['name'],
                 'method' => $row['method'],
-                'addTime' => $row['addTime'],
                 'username' => $row['username']
             ));
             return $recipe;

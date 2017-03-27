@@ -18,6 +18,7 @@ CREATE TABLE Receipe (
     member_id INTEGER REFERENCES Member(id),
     category_id INTEGER REFERENCES Category(id),
     name varchar(30) NOT NULL,
+    method varchar(4000) NOT NULL,
     addTime TIMESTAMP,
     username varchar(15) NOT NULL
 );

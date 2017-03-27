@@ -1,5 +1,5 @@
 <?php
-
+require 'app/models/receipe.php';
   class HelloWorld extends BaseModel{
 
     public static function say_hi(){

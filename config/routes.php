@@ -27,3 +27,7 @@ $routes->get('/login', function() {
 $routes->get('/register', function() {
     HelloWorldController::register();
 });
+
+$routes->get('/receipes', function() {
+    ReceipeController::index();
+});

@@ -2,29 +2,32 @@
 
   class HelloWorldController extends BaseController{
 
-    public static function index(){
+      public static function index(){
       // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
       echo 'Tämä on etusivu. Jeejee';
     }
 
     public static function sandbox(){
       // Testaa koodiasi täällä
-      View::make('helloworld.html');
+        $maksalaatikko = Receipe::find(1);
+        $receipes = Receipe::all();
+        Kint::dump($maksalaatikko);
+        Kint::dump($receipes);
     }
       
-    public static function etusivu() {
+    public static function home() {
         View::make('index.html');
     }
     
-    public static function kategorialistaus() {
+    public static function categorylisting() {
         View::make('categories.html');
     }  
     
-    public static function reseptinlisays() {
+    public static function addreceipe() {
         View::make('addreceipe.html');
     }  
       
-    public static function reseptisivu() {
+    public static function receipepage() {
         View::make('receipepage.html');
     }
       
@@ -35,8 +38,4 @@
     public static function register() {
         View::make('register.html');
     } 
-      
-    public static function addreceipe() {
-        View::make('addreceipe.html');
-    }  
   }

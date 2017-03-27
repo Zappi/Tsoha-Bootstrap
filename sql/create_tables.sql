@@ -37,7 +37,7 @@ CREATE TABLE Ingredient (
     amount varchar(10)
 );
 
-CREATE TABLE ReceipeIngredient (
+CREATE TABLE RecipeIngredient (
     recipe_id INTEGER REFERENCES Recipe(id),
     ingredient_id INTEGER REFERENCES Ingredient(id)
 );

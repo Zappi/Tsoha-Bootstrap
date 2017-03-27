@@ -9,10 +9,7 @@
 
     public static function sandbox(){
       // Testaa koodiasi täällä
-        $maksalaatikko = Recipe::find(1);
-        $receipes = Recipe::all();
-        Kint::dump($maksalaatikko);
-        Kint::dump($receipes);
+
     }
       
     public static function home() {

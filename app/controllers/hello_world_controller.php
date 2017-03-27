@@ -9,8 +9,8 @@
 
     public static function sandbox(){
       // Testaa koodiasi täällä
-        $maksalaatikko = Receipe::find(1);
-        $receipes = Receipe::all();
+        $maksalaatikko = Recipe::find(1);
+        $receipes = Recipe::all();
         Kint::dump($maksalaatikko);
         Kint::dump($receipes);
     }
@@ -23,11 +23,11 @@
         View::make('categories.html');
     }  
     
-    public static function addreceipe() {
+    public static function addrecipe() {
         View::make('addreceipe.html');
     }  
       
-    public static function receipepage() {
+    public static function recipepage() {
         View::make('receipepage.html');
     }
       

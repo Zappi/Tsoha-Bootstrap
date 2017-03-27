@@ -12,12 +12,12 @@
     HelloWorldController::categorylisting();
   });
 
- $routes->get('/addreceipe', function() {
-    HelloWorldController::addreceipe();
+ $routes->get('/addrecipe', function() {
+    HelloWorldController::addrecipe();
   });
 
- $routes->get('/receipepage', function() {
-    HelloWorldController::receipepage();
+ $routes->get('/recipepage', function() {
+    HelloWorldController::recipepage();
   });
 
 $routes->get('/login', function() {
@@ -28,6 +28,6 @@ $routes->get('/register', function() {
     HelloWorldController::register();
 });
 
-$routes->get('/receipes', function() {
-    ReceipeController::index();
+$routes->get('/recipes', function() {
+    RecipeController::index();
 });

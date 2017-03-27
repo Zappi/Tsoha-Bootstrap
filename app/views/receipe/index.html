@@ -19,11 +19,11 @@
     <tbody>
         {% for receipe in receipes%}
         <tr>
-            <td><a href="{{base_path}}/receipe/{{receipe.id}}">{{receipe.name}}</td>
-          <td>{{receipe.name}}</td>
-          <td>{{receipe.method}}</td>
-          <td>{{receipe.addTime}}</td>
-          <td>{{receipe.username}}</td>
+            <td><a href="{{base_path}}/recipe/{{recipe.id}}">{{recipe.name}}</td>
+          <td>{{recipe.name}}</td>
+          <td>{{recipe.method}}</td>
+          <td>{{recipe.addTime}}</td>
+          <td>{{recipe.username}}</td>
       {% endfor %}
     </tbody>
   </table>

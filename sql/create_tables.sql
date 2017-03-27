@@ -13,7 +13,7 @@ CREATE TABLE Category (
     name varchar(20) NOT NULL
 );
 
-CREATE TABLE Receipe (
+CREATE TABLE Recipe (
     id SERIAL PRIMARY KEY,
     member_id INTEGER REFERENCES Member(id),
     category_id INTEGER REFERENCES Category(id),
@@ -25,7 +25,7 @@ CREATE TABLE Receipe (
 
 CREATE TABLE Review (
     member_id INTEGER REFERENCES Member(id),
-    receipe_id INTEGER REFERENCES Receipe(id),
+    recipe_id INTEGER REFERENCES Recipe(id),
     username varchar(15) NOT NULL,
     addTime TIMESTAMP,
     message varchar(400) NOT NULL
@@ -38,6 +38,6 @@ CREATE TABLE Ingredient (
 );
 
 CREATE TABLE ReceipeIngredient (
-    receipe_id INTEGER REFERENCES Receipe(id),
+    recipe_id INTEGER REFERENCES Recipe(id),
     ingredient_id INTEGER REFERENCES Ingredient(id)
 );

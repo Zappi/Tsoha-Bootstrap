@@ -1,8 +1,8 @@
 <?php
 
-class Receipe extends BaseModel {
+class Recipe extends BaseModel {
     
-    public $id, $member_id, $category_id, $name, $method, $addTIme, $username;
+    public $id, $member_id, $category_id, $name, $method, $addTime, $username;
     //Konstruktori
     public function __construct($attributes) {
         parent::__construct($attributes); 
@@ -11,15 +11,15 @@ class Receipe extends BaseModel {
     } 
 
     public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Receipe');
+        $query = DB::connection()->prepare('SELECT * FROM Recipe');
 
         $query->execute();
 
         $rows = $query->fetchAll();
-        $receipes = array();
+        $recipes = array();
 
         foreach($rows as $row) {
-            $receipes[] = new Receipe(array(
+            $recipes[] = new Recipe(array(
                 'id' => $row['id'],
                 'member_id' => $row['member_id'],
                 'category_id' => $row['category_id'],
@@ -29,16 +29,16 @@ class Receipe extends BaseModel {
                 'username' => $row['username']
             ));
         }
-        return $receipes;
+        return $recipes;
     }
 
     public static function find($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Receipe WHERE id = :id LIMIT 1');
+        $query = DB::connection()->prepare('SELECT * FROM Recipe WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
 
         if($row) {
-            $receipe = new Receipe(array(
+            $recipe = new Recipe(array(
                 'id' => $row['id'],
                 'member_id' => $row['member_id'],
                 'category_id' => $row['category_id'],
@@ -47,7 +47,7 @@ class Receipe extends BaseModel {
                 'addTime' => $row['addTime'],
                 'username' => $row['username']
             ));
-            return $receipe;
+            return $recipe;
         }
         return null;
     } 

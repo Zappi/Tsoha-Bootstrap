@@ -1,19 +1,18 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <h1> Lisää uusi resepti </h1>
 
-<form>
+<form method="post" action="{{base_path}}/recipes">
     <div class="form-group">
         <label>Reseptin nimi</label>
-        <input type="text" class="form-control" value="Reseptin nimi" required>
-    </div>    
+        <input type="text" name="name" class="form-control">
+    </div>
 
     <div class="form-group">
         <label>TODO KATEGORIAVALITSIN</label>
-        <input type="text" class="form-control" value="Todo vetovalikko">
+        <input type="text" name="categories" class="form-control">
     </div>
-    
+
     <div class="form-group">
         <label>Raaka-aineet</label>
         <textarea class="form-control" rows="8" id="TODO"></textarea>
@@ -25,7 +24,7 @@
     </div>
 
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Lähetä</button>
+        <button type="submit" class="btn btn-primary">Lähetä</button>
     </div>
 
 

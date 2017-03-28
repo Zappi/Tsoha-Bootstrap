@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block content %}
+<h1>Reseptit</h1>
+
+<p>
+    <a href="{{base_path}}/recipes/addrecipe" class="btn btn-success">Lisää resepti</a>
+</p>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Reseptin nimi</th>
+            <th>Lisäysaika</th>
+            <th>Lisääjä</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for recipe in recipes%}
+        <tr>
+            <td><a href="{{base_path}}/recipepage/{{recipe.id}}">{{recipe.name}}</td>
+          <td>{{recipe.addtime}}</td>
+          <td>{{recipe.username}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

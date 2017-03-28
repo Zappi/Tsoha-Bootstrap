@@ -9,6 +9,7 @@
 
     public static function sandbox(){
       // Testaa koodiasi täällä
+      $ingredients = Recipe::findIngredients(1);
 
     }
       
@@ -19,15 +20,6 @@
     public static function categorylisting() {
         View::make('categories.html');
     }  
-    
-    public static function addrecipe() {
-        View::make('addreceipe.html');
-    }  
-      
-    public static function recipepage() {
-        View::make('receipepage.html');
-    }
-      
     public static function login() {
         View::make('login.html');
     }

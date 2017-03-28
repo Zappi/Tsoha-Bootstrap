@@ -12,14 +12,6 @@
     HelloWorldController::categorylisting();
   });
 
- $routes->get('/addrecipe', function() {
-    HelloWorldController::addrecipe();
-  });
-
- $routes->get('/recipepage', function() {
-    HelloWorldController::recipepage();
-  });
-
 $routes->get('/login', function() {
     HelloWorldController::login();
 });
@@ -29,5 +21,17 @@ $routes->get('/register', function() {
 });
 
 $routes->get('/recipes', function() {
-    RecipeController::index();
+    RecipeController::recipes();
+});
+
+$routes->post('/recipes', function() {
+  RecipeController::store();
+});
+
+ $routes->get('/recipes/addrecipe', function() {
+    RecipeController::create();
+  });
+
+$routes->get('/recipepage/:id', function($id) {
+    RecipeController::show($id);
 });

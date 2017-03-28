@@ -1,21 +1,17 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
-<h1> Ruoan nimi </h1>
+<h1> {{recipe.name}}</h1>
 
 <h3> Tarvikkeet </h3>
 
-<ul class="list-unstyled"> 
-    <li>2dl vehnäjauhoja</li>
-    <li>5dl maitoa</li>
-    <li>2 kananmunaa</li>
-    <li>2tl suolaa</li>
-    <li>2tl paprikajauhetta</li>
-    <li>1tl chilijauhetta</li>
+<ul class="list-unstyled">
+    {% for ingredient in ingredients %}
+    <li>{{ingredient.amount}} {{ingredient.name}}</li>
+    {% endfor %}
 </ul>
 
 <h3>Ohjeet</h3>
-<p>Tässä kohtaa sitten kerrotaan kivasti miten ainesosista pitäisi saada jotain tehdyksi. </p>
+<p>{{recipe.method}}</p>
 
 <p>Tänne tulee sitten kivasti kommenttiosio. </p>
 

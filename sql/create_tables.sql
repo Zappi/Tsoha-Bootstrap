@@ -18,6 +18,7 @@ CREATE TABLE Recipe (
     member_id INTEGER REFERENCES Member(id),
     category_id INTEGER REFERENCES Category(id),
     name varchar(30) NOT NULL,
+    addtime TIMESTAMP, 
     method varchar(4000) NOT NULL,
     username varchar(15) NOT NULL
 );
@@ -26,6 +27,7 @@ CREATE TABLE Review (
     member_id INTEGER REFERENCES Member(id),
     recipe_id INTEGER REFERENCES Recipe(id),
     username varchar(15) NOT NULL,
+    addtime TIMESTAMP,
     message varchar(400) NOT NULL
 );
 

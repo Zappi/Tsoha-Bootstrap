@@ -4,11 +4,20 @@
 
 <h3> Tarvikkeet </h3>
 
-<ul class="list-unstyled">
-    {% for ingredient in ingredients %}
-    <li>{{ingredient.amount}} {{ingredient.name}}</li>
+<ul class="list-unstyled" style="width:10%; float:left">
+    {% for a in ingredients %}
+    <li>{{a.name}}</li>
     {% endfor %}
 </ul>
+<ul class="list-unstyled" style="width:10%; float:left">
+    {% for a in amounts %}
+    <li>{{a.amount}}</li>
+    {% endfor %}
+</ul>
+
+<br>
+<br>
+<br>
 
 <h3>Ohjeet</h3>
 <p>{{recipe.method}}</p>

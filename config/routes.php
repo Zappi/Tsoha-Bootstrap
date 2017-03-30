@@ -8,12 +8,12 @@
     HelloWorldController::sandbox();
   });
 
-   $routes->get('/categories', function() {
+$routes->get('/categories', function() {
     HelloWorldController::categorylisting();
-  });
+});
 
 $routes->get('/login', function() {
-    HelloWorldController::login();
+        HelloWorldController::login();
 });
 
 $routes->get('/register', function() {
@@ -28,10 +28,11 @@ $routes->post('/recipes', function() {
   RecipeController::store();
 });
 
- $routes->get('/recipes/addrecipe', function() {
+$routes->get('/recipes/addrecipe', function() {
     RecipeController::create();
-  });
+});
 
 $routes->get('/recipepage/:id', function($id) {
     RecipeController::show($id);
 });
+

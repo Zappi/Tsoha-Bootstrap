@@ -2,7 +2,7 @@
 
 class Recipe extends BaseModel {
     
-    public $id, $member_id, $category_id, $name, $addtime, $method,$username;
+    public $id, $member_id, $category_id, $name, $addtime, $method, $username;
     //Konstruktori
     public function __construct($attributes) {
         parent::__construct($attributes); 
@@ -45,41 +45,48 @@ class Recipe extends BaseModel {
                 'addtime' => $row['addtime'],
                 'method' => $row['method'],
                 'username' => $row['username'],
-                'ingredients' => findIngredients('id')
+                //ingredients' => findIngredients('id')
             ));
             return $recipe;
         }
         return null;
     } 
-
+    
     public static function findIngredients($id) {    
-        $query = DB::connection()->prepare('SELECT Ingredient.name, Ingredient.amount FROM Recipe, Ingredient, 
+        $query = DB::connection()->prepare('SELECT Ingredient.name, RecipeIngredient.amount as amount FROM Recipe, Ingredient, 
         RecipeIngredient WHERE Recipe.id = :id AND RecipeIngredient.recipe_id = Recipe.id 
         AND RecipeIngredient.ingredient_id = Ingredient.id');
         
         $query->execute(array('id' => $id));
         $rows = $query->fetchAll();
-        $ingredients = array();        
+
+        $ingredients = array();
+        $amounts = array();
 
         foreach ($rows as $row) {
             $ingredients[] = new Ingredient(array(
-                'amount' => $row['amount'],
                 'name' => $row['name']
+                ));
+        }
+
+        foreach ($rows as $row) {
+            $amounts[] = new RecipeIngredient(array(
+                'amount' => $row['amount']
             ));
         }
-            return $ingredients;
-        }
 
-        //haeAineosat joka parametrina resepti id
+        $placeholder = array($amounts, $ingredients);
+        return $placeholder;
+    }
+
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO Receipe (name, addtime, method, username) VALUES
-        (:name, now(), :method, :username RETURNING id');
+        $query = DB::connection()->prepare('INSERT INTO Recipe (name, addtime, method, username) VALUES
+        (:name, CURRENT_TIMESTAMP, :method, :username) RETURNING id');
 
         $query->execute(array(
-            name => $this->name, 
-            method => $this->method,
-            addtime => $this->addtime,
-            username => $this->username));
+            'name' => $this->name, 
+            'method' => $this->method,
+            'username' => $this->username));
 
             $row = $query->fetch();
             

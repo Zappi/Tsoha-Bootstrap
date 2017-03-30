@@ -12,28 +12,31 @@ class RecipeController extends BaseController{
 public static function show($id) {
     $recipe = Recipe::find($id);
     $ingredients = Recipe::findIngredients($id);
+    $amount = $ingredients[0];
+    $ingredients = $ingredients[1];
 
-    View::make('recipe/recipepage.html', array('recipe' => $recipe, 'ingredients' => $ingredients));
+    View::make('recipe/recipepage.html', array('recipe' => $recipe, 'ingredients' => $ingredients, 'amounts' => $amount));
 }
 
  public static function create() {
          $recipes = Recipe::all();
-         View::make('recipe/addrecipe.html', array('recipes' => $recipes));
+         $ingredients = Ingredient::all();
+         View::make('recipe/addrecipe.html', array('recipes' => $recipes, 'ingredients' => $ingredients));
 }   
 
 
 public static function store() {
+    
     $params = $_POST;
 
-    $receipe = new Recipe(array(
+    $recipe = new Recipe(array(
         'name' => $params['name'],
-        'addtime' => $params['addtime'],
         'method' => $params['method'],
-        'username' => $params['username']
+        'username' => '#KORJAATÄMÄ'
     ));
     
-    $receipe->save();
+    $recipe->save();
 
-    //Redirect::to('/' . $recipe->id, array('message' => 'Resepti lisätty onnistuneesti'));
+    Redirect::to('/recipepage/' . $recipe->id, array('message' => 'Resepti lisätty onnistuneesti'));
     }
 }

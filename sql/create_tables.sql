@@ -33,11 +33,11 @@ CREATE TABLE Review (
 
 CREATE TABLE Ingredient (
     id SERIAL PRIMARY KEY,
-    name varchar(25) NOT NULL,
-    amount varchar(10)
+    name varchar(25) NOT NULL
 );
 
 CREATE TABLE RecipeIngredient (
     recipe_id INTEGER REFERENCES Recipe(id),
-    ingredient_id INTEGER REFERENCES Ingredient(id)
+    ingredient_id INTEGER REFERENCES Ingredient(id),
+    amount varchar(10)
 );

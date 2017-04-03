@@ -36,3 +36,16 @@ $routes->get('/recipepage/:id', function($id) {
     RecipeController::show($id);
 });
 
+$routes->get('/recipepage/:id/edit', function($id) {
+    RecipeController::edit($id);
+});
+
+$routes->post('/recipepage/:id/edit', function($id) {
+    RecipeController::update($id);
+});
+
+$routes->post('/recipepage/:id/destroy', function($id) {
+    RecipeController::destroy($id);
+});
+
+

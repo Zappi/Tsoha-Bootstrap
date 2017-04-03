@@ -1,14 +1,16 @@
 <?php
 
 class Recipe extends BaseModel {
-    
-    public $id, $member_id, $category_id, $name, $addtime, $method, $username;
+
+    public $id, $member_id, $category_id, $name, $addtime, $method, $username, $validators;
+
+
     //Konstruktori
     public function __construct($attributes) {
-        parent::__construct($attributes); 
-        
-        
-    } 
+        parent::__construct($attributes);
+        $this->validators = array('validate_name', 'validate_method');
+
+    }
 
     public static function all() {
         $query = DB::connection()->prepare('SELECT * FROM Recipe');
@@ -50,13 +52,13 @@ class Recipe extends BaseModel {
             return $recipe;
         }
         return null;
-    } 
-    
-    public static function findIngredients($id) {    
-        $query = DB::connection()->prepare('SELECT Ingredient.name, RecipeIngredient.amount as amount FROM Recipe, Ingredient, 
-        RecipeIngredient WHERE Recipe.id = :id AND RecipeIngredient.recipe_id = Recipe.id 
+    }
+
+    public static function findIngredients($id) {
+        $query = DB::connection()->prepare('SELECT Ingredient.name, RecipeIngredient.amount as amount FROM Recipe, Ingredient,
+        RecipeIngredient WHERE Recipe.id = :id AND RecipeIngredient.recipe_id = Recipe.id
         AND RecipeIngredient.ingredient_id = Ingredient.id');
-        
+
         $query->execute(array('id' => $id));
         $rows = $query->fetchAll();
 
@@ -66,7 +68,7 @@ class Recipe extends BaseModel {
         foreach ($rows as $row) {
             $ingredients[] = new Ingredient(array(
                 'name' => $row['name']
-                ));
+            ));
         }
 
         foreach ($rows as $row) {
@@ -84,12 +86,46 @@ class Recipe extends BaseModel {
         (:name, CURRENT_TIMESTAMP, :method, :username) RETURNING id');
 
         $query->execute(array(
-            'name' => $this->name, 
+            'name' => $this->name,
             'method' => $this->method,
             'username' => $this->username));
 
-            $row = $query->fetch();
-            
-            $this->id = $row['id'];
-    }        
+        $row = $query->fetch();
+
+        $this->id = $row['id'];
+    }
+    
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Recipe SET name = :name, addtime = :addtime, method = :method, username = :username WHERE id = :id');
+        $query->execute(array(
+            'id' => $this->id,
+            'name' => $this->name,
+            'addtime' => $this->addtime,
+            'method' => $this->method,
+            'username' => $this->username));
+        
+    }
+    
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Recipe WHERE id = :id');
+        $query->execute(array('id' => $this->id));
+    }
+
+    public function errors() {
+        $errors = array();
+
+        foreach($this->validators as $validator) {
+            $errors = array_merge($errors, $this->{$validator}());
+        }
+        return $errors;
+    }
+
+    public function validate_name() {
+        return parent::validate_string(" " . $this->name);
+    }
+
+    public function validate_method() {
+        return parent::validate_string($this->method);
+    }
+ 
 }

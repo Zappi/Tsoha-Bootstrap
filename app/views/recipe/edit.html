@@ -1,30 +1,22 @@
 {% extends "base.html" %} {% block content %}
 
-{% if errors %} 
-<div class="alert alert-danger">
-    <ul>
-        {% for error in errors %} 
-            <li>{{error}}</li>
+{% if errors %}
+    <div class="alert alert-danger">
+        {% for error in errors %}
+            {{error}}<br />
         {% endfor %}
-    </ul>
-</div>
+    </div>
 {% endif %}
 
 
-<h1> Lisää uusi resepti </h1>
+<h1> Muokkaa reseptiä </h1>
 
-<form method="post" action="{{base_path}}/recipes">
+<form method="post">
+    
     <div class="form-group">
         <label>Reseptin nimi</label>
-        <input type="text" name="name" class="form-control">
-    </div>
+        <input type="text" name="name" value="{{attributes.name}}" class="form-control">
 
-    <!-- <div class="form-group">
-        <label>TODO KATEGORIAVALITSIN</label>
-        <input type="text" name="categories" class="form-control">
-    </div>
-    */
-    -->
     <div class="form-group">
         <label>Raaka-aineet</label> <br>{%for i in 0..10%}
 
@@ -44,14 +36,13 @@
 
     <div class="form-group">
         <label for="resepti">Resepti</label>
-        <textarea class="form-control" name="method" rows="8" id="resepti"></textarea>
+        <textarea class="form-control" name="method" value="{{attributes.method}}" rows="8" id="resepti"></textarea>
     </div>
 
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Lähetä</button>
     </div>
-
-
+    </div>
 </form>
 
 {% endblock %}

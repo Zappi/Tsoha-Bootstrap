@@ -26,4 +26,18 @@
       return $errors;
     }
 
+    public function validate_string($name) {
+        $errors = array();
+
+        if($name == null) {
+          $errors[] = "Merkkijono ei voi olla tyhjä.";
+        }
+
+        if(strlen($name) < 3) {
+            $errors[] = 'Merkkijono tulee olla vähintään 3 merkkiä pitkä!';
+        }
+        return $errors;
+    }
+    
+
   }

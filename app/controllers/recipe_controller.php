@@ -26,7 +26,6 @@ class RecipeController extends BaseController{
 
 
     public static function store() {
-
         $params = $_POST;
 
         $attributes = array(

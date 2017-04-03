@@ -20,10 +20,6 @@
     public static function categorylisting() {
         View::make('categories.html');
     }  
-    public static function login() {
-        View::make('login.html');
-    }
-      
     public static function register() {
         View::make('register.html');
     } 

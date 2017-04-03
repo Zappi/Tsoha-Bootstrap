@@ -8,6 +8,7 @@ INSERT INTO Ingredient (name) VALUES ('Maito');
 INSERT INTO Ingredient (name) VALUES ('Jauhot');
 INSERT INTO Ingredient (name) VALUES ('Kana');
 
+INSERT INTO Member (username, password, email, registered, admin) VALUES ('Zappi', 'jeejee', 'jerry@zappi.fi', true, true);
 
 
 INSERT INTO Recipe (name, addtime, method, username) VALUES ('Maksalaatikko', CURRENT_TIMESTAMP, 'Sekoita ja paista uunissa','Zappi');

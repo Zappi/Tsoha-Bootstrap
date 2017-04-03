@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% block content %} {% import "macros/forms.html" as forms %}
 <h1>Reseptit</h1>
 
 <p>
@@ -18,16 +18,17 @@
 
     <tbody>
         {% for recipe in recipes%}
-            <tr>
-            <td><a href="{{base_path}}/recipepage/{{recipe.id}}">{{recipe.name}}</td>
-          <td>{{recipe.addtime}}</td>
-          <td>{{recipe.username}}</td>
-          <td><form method="get" action="{{base_path}}/recipepage/{{recipe.id}}/edit" style="display: inline-block;">
-  <button type="submit" class="btn btn-default">Muokkaa</button>
-</form></td>
-          <td><form method="post" action="{{base_path}}/recipepage/{{recipe.id}}/destroy" style="display: inline-block;">
-  <button type="submit" class="btn btn-danger">Poista</button>
-</form></td>
+        <tr>
+            <td><a href="{{base_path}}/recipepage/{{recipe.id}}">{{recipe.name}}</a></td>
+            <td>{{recipe.addtime}}</td>
+            <td>{{recipe.username}}</td>
+          
+            <td>{{forms.edit_button("#{base_path}/recipepage/#{recipe.id}/edit")}}
+            </td>
+                
+            <td>{{forms.destroy_button("#{base_path}/recipepage/#{recipe.id}/destroy")}}
+            </td>
+            
         </tr>
       {% endfor %}
     </tbody>

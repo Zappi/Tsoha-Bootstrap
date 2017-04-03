@@ -12,10 +12,6 @@ $routes->get('/categories', function() {
     HelloWorldController::categorylisting();
 });
 
-$routes->get('/login', function() {
-        HelloWorldController::login();
-});
-
 $routes->get('/register', function() {
     HelloWorldController::register();
 });
@@ -47,5 +43,13 @@ $routes->post('/recipepage/:id/edit', function($id) {
 $routes->post('/recipepage/:id/destroy', function($id) {
     RecipeController::destroy($id);
 });
+
+$routes->get('/login', function() {
+    UserController::login();
+});
+
+$routes->post('/login', function() {
+    UserController::handle_login();
+}); 
 
 

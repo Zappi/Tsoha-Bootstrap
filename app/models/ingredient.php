@@ -2,10 +2,10 @@
 
 class Ingredient extends BaseModel {
 
-    public $id, $name;
+    public $id, $ingredientname;
 
-    public function __constructor($attributes) {
-        parent::__constructor($attributes);
+    public function __construct($attributes) {
+        parent::__construct($attributes);
     }
 
         public static function all() {
@@ -18,9 +18,12 @@ class Ingredient extends BaseModel {
         foreach($rows as $row) {
             $ingredients[] = new Ingredient(array(
                 'id' => $row['id'],
-                'name' => $row['name']
+                'ingredientname' => $row['ingredientname']
             ));
         }
+        
+        var_dump($ingredients);
+        
         return $ingredients;
         }
     }

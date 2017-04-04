@@ -2,14 +2,12 @@
 
 class Recipe extends BaseModel {
 
-    public $id, $member_id, $category_id, $name, $addtime, $method, $username, $validators;
-
+    public $id, $member_id, $category_id, $name, $addtime, $method, $username, /* validators, */ $ingredient, $ingredientname;
 
     //Konstruktori
     public function __construct($attributes) {
         parent::__construct($attributes);
         $this->validators = array('validate_name', 'validate_method');
-
     }
 
     public static function all() {
@@ -19,7 +17,7 @@ class Recipe extends BaseModel {
         $rows = $query->fetchAll();
         $recipes = array();
 
-        foreach($rows as $row) {
+        foreach ($rows as $row) {
             $recipes[] = new Recipe(array(
                 'id' => $row['id'],
                 'member_id' => $row['member_id'],
@@ -38,7 +36,8 @@ class Recipe extends BaseModel {
         $query->execute(array('id' => $id));
         $row = $query->fetch();
 
-        if($row) {
+        if ($row) {
+            $kivamuuttuja = Recipe::findIngredientsBetter($id);
             $recipe = new Recipe(array(
                 'id' => $row['id'],
                 'member_id' => $row['member_id'],
@@ -47,11 +46,34 @@ class Recipe extends BaseModel {
                 'addtime' => $row['addtime'],
                 'method' => $row['method'],
                 'username' => $row['username'],
-                //ingredients' => findIngredients('id')
             ));
+            $recipe->ingredient = $kivamuuttuja;
+
+            var_dump($recipe);
+
             return $recipe;
         }
+
         return null;
+    }
+
+    public static function findIngredientsBetter($id) {
+        $query = DB::connection()->prepare('SELECT * FROM recipeingredient INNER JOIN ingredient ON recipeingredient.ingredient_id = ingredient.id WHERE recipeingredient.recipe_id = :id');
+
+        $query->execute(array('id' => $id));
+        $rows = $query->fetchAll();
+
+        $list = array();
+
+        foreach ($rows as $row) {
+            $list[] = new RecipeIngredient(array(
+                'recipe_id' => $row['recipe_id'],
+                'ingredient_id' => $row['ingredient_id'],
+                'amount' => $row['amount'],
+                'ingredientname' => $row['ingredientname']
+            ));
+        }
+        return $list;
     }
 
     public static function findIngredients($id) {
@@ -91,10 +113,9 @@ class Recipe extends BaseModel {
             'username' => $this->username));
 
         $row = $query->fetch();
-
         $this->id = $row['id'];
     }
-    
+
     public function update() {
         $query = DB::connection()->prepare('UPDATE Recipe SET name = :name, method = :method, username = :username WHERE id = :id');
         $query->execute(array(
@@ -102,9 +123,8 @@ class Recipe extends BaseModel {
             'name' => $this->name,
             'method' => $this->method,
             'username' => $this->username));
-        
     }
-    
+
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM Recipe WHERE id = :id');
         $query->execute(array('id' => $this->id));
@@ -113,7 +133,7 @@ class Recipe extends BaseModel {
     public function errors() {
         $errors = array();
 
-        foreach($this->validators as $validator) {
+        foreach ($this->validators as $validator) {
             $errors = array_merge($errors, $this->{$validator}());
         }
         return $errors;
@@ -126,5 +146,5 @@ class Recipe extends BaseModel {
     public function validate_method() {
         return parent::validate_string($this->method);
     }
- 
+
 }

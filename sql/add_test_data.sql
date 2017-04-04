@@ -2,11 +2,11 @@
 INSERT INTO Member (username, password, email) VALUES ('Mikko', 'Mallikas', 'testi@gmail.com');
 INSERT INTO Member (username, password, email) VALUES ('Kimmo', 'Kulmikas', 'kimmokulmikas@gmail.com');
 
-INSERT INTO Ingredient (name) VALUES ('Kananmuna');
-INSERT INTO Ingredient (name) VALUES ('Jauheliha');
-INSERT INTO Ingredient (name) VALUES ('Maito');
-INSERT INTO Ingredient (name) VALUES ('Jauhot');
-INSERT INTO Ingredient (name) VALUES ('Kana');
+INSERT INTO Ingredient (ingredientName) VALUES ('Kananmuna');
+INSERT INTO Ingredient (ingredientName) VALUES ('Jauheliha');
+INSERT INTO Ingredient (ingredientName) VALUES ('Maito');
+INSERT INTO Ingredient (ingredientName) VALUES ('Jauhot');
+INSERT INTO Ingredient (ingredientName) VALUES ('Kana');
 
 INSERT INTO Member (username, password, email, registered, admin) VALUES ('Zappi', 'jeejee', 'jerry@zappi.fi', true, true);
 

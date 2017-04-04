@@ -33,7 +33,7 @@ CREATE TABLE Review (
 
 CREATE TABLE Ingredient (
     id SERIAL PRIMARY KEY,
-    name varchar(25) NOT NULL
+    ingredientName varchar(25) NOT NULL
 );
 
 CREATE TABLE RecipeIngredient (

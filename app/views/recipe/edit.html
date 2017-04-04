@@ -1,47 +1,48 @@
 {% extends "base.html" %} {% block content %}
 
 {% if errors %}
-    <div class="alert alert-danger">
-        {% for error in errors %}
-            {{error}}<br />
-        {% endfor %}
-    </div>
+<div class="alert alert-danger">
+    {% for error in errors %}
+    {{error}}<br />
+    {% endfor %}
+</div>
 {% endif %}
 
 
 <h1> Muokkaa reseptiä </h1>
 
 <form method="post">
-    
+
     <div class="form-group">
         <label>Reseptin nimi</label>
         <input type="text" name="name" value="{{attributes.name}}" class="form-control">
 
-    <div class="form-group">
-        <label>Raaka-aineet</label> <br>{%for i in 0..10%}
+        <div class="form-group">
+            <label>Raaka-aineet</label> <br>{%for i in 0..10%}
 
-        <select name="ingredient">
-          <option></option>
-            {% for ingredient in ingredients %}
-            <option>{{ingredient.name}}</option>
-            {% endfor %}
+            <select name="ingredient[]">
+                <option></option>
+                {% for ingredient in ingredients %}
+                <option>{{ingredient.ingredientname}}</option>
+                {% endfor %}
             </select>
-        <br>
+            </select>
+            <br>
             <label>Määrä</label>
             <input type="text" name="amount" id="TODO">
-        <!-- Tsekkaa tää -->
+            <!-- Tsekkaa tää -->
 
-        <br> {% endfor %}
-    </div>
+            <br> {% endfor %}
+        </div>
 
-    <div class="form-group">
-        <label for="resepti">Resepti</label>
-        <textarea class="form-control" name="method" value="{{attributes.method}}" rows="8" id="resepti"></textarea>
-    </div>
+        <div class="form-group">
+            <label for="resepti">Resepti</label>
+            <textarea class="form-control" name="method" value="{{attributes.method}}" rows="8" id="resepti"></textarea>
+        </div>
 
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Lähetä</button>
-    </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Lähetä</button>
+        </div>
     </div>
 </form>
 

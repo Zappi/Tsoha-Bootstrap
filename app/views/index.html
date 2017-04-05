@@ -1,4 +1,15 @@
  {% extends "base.html" %} {% block content %}
+ 
+{% if user_logged_in %}
+{% if message %}
+    
+<div class="alert alert-success">
+
+    <h3>{{message}}</h3>
+   
+</div>
+{% endif %}
+{% endif %}
 
 <h1 class="text-center"> Reseptisivusto </h1>
 

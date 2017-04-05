@@ -26,17 +26,19 @@
     */
     -->
     <div class="form-group">
-        <label>Raaka-aineet</label> <br>{%for i in 0..10%}
+        <label>Raaka-aineet</label> <br>{%for i in 0..15%}
 
-        <select name="ingredient[]">
-            <option></option>
+        <select name="ingredients[]">
+            <option value="-1"></option>
             {% for ingredient in ingredients %}
-            <option>{{ingredient.ingredientname}}</option>
+            <option value="{{ingredient.id}}">{{ingredient.ingredientname}}</option>
             {% endfor %}
         </select>
         <br>
+        
+        
         <label>Määrä</label>
-        <input type="text" name="amount[]" id="TODO">
+        <input type="text" name="amounts[]">
         <!-- Tsekkaa tää -->
 
         <br> {% endfor %}

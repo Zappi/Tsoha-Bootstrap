@@ -15,7 +15,7 @@
       
     public static function home() {
         View::make('index.html');
-    }
+    } 
     
     public static function categorylisting() {
         View::make('categories.html');

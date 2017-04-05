@@ -7,7 +7,7 @@ class UserController extends BaseController {
 
     public static function handle_login() {
         $params = $_POST;
-        
+                
         $user = User::authenticate($params['username'], $params['password']);
         
         if(!$user) {
@@ -16,7 +16,7 @@ class UserController extends BaseController {
             
             $_SESSION['user'] = $user->id;
             
-            Redirect::to('/', array('message' => 'Tervetuloa takaisin' . $user->username . '!'));
+            Redirect::to('/', array('message' => 'Tervetuloa takaisin  ' . $user->username . '!'));
         }
     }
 }

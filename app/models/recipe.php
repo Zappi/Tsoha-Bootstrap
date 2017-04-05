@@ -104,6 +104,7 @@ class Recipe extends BaseModel {
     }
 
     public function save() {
+        
         $query = DB::connection()->prepare('INSERT INTO Recipe (name, addtime, method, username) VALUES
         (:name, CURRENT_TIMESTAMP, :method, :username) RETURNING id');
 
@@ -114,6 +115,7 @@ class Recipe extends BaseModel {
 
         $row = $query->fetch();
         $this->id = $row['id'];
+        
     }
 
     public function update() {

@@ -9,16 +9,16 @@ class RecipeIngredient extends BaseModel {
     }
 
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO RecipeIngredient (recipe_id, ingredient_id, amount) VALUES
-        (:recipe_id, :ingredient_id, :amount');
-
+        $query = DB::connection()->prepare('INSERT INTO RecipeIngredient (recipe_id, ingredient_id, amount) VALUES (:recipe_id, :ingredient_id, :amount)');
         $query->execute(array(
-            'name' => $this->name,
-            'method' => $this->method,
-            'username' => $this->username));
-
+            'recipe_id' => $this->recipe_id,
+            'ingredient_id' => $this->ingredient_id,
+            'amount' => $this->amount
+        ));
+        
         $row = $query->fetch();
-        $this->id = $row['id'];
     }
+    
+    
 
 }

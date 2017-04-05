@@ -27,23 +27,42 @@ class RecipeController extends BaseController {
     public static function store() {
         $params = $_POST;
 
-
-
-        //$ingredients = array(
-        //)
-
         $attributes = array(
             'name' => $params['name'],
             'method' => $params['method'],
             'username' => '#KORJAATÄMÄ'
         );
-
         $recipe = new Recipe($attributes);
+        $recipe->save();
+        
+        
+        $ingredients = $params['ingredients'];
+        $amounts = $params['amounts'];
+ 
+        
+        for ($x = 0; $x <count($ingredients); $x++) {
+            
+            if($ingredients[$x] == -1) {
+                continue;
+            }
+            
+        $ingredientsAndAmounts = array(
+            'recipe_id'=>$recipe->id,
+            'ingredient_id'=> $ingredients[$x],
+            'amount'=>$amounts[$x]
+        );
+        
+        $recipeIngredient = new RecipeIngredient($ingredientsAndAmounts);
+        $recipeIngredient->save();
+
+        }
+     
+        
         $errors = $recipe->errors();
 
         if (count($errors) == 0) {
             //Recipe works
-            $recipe->save();
+            
             Redirect::to('/recipepage/' . $recipe->id, array('message' => 'Resepti lisätty onnistuneesti'));
         } else {
             //Something wrong with recipe

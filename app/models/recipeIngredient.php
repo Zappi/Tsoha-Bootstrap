@@ -19,6 +19,12 @@ class RecipeIngredient extends BaseModel {
         $row = $query->fetch();
     }
     
+    public function destroy() {
+        
+        $query = DB::connection()->prepare('DELETE FROM RecipeIngredient WHERE recipe_id = :recipe_id');
+        $query->execute(array('recipe_id' => $this->id));
+    }
+    
     
 
 }

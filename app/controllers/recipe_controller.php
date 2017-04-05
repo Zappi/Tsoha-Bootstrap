@@ -26,11 +26,11 @@ class RecipeController extends BaseController {
 
     public static function store() {
         $params = $_POST;
-
+        
         $attributes = array(
             'name' => $params['name'],
             'method' => $params['method'],
-            'username' => '#KORJAATÄMÄ'
+            'username' => 'Zappi'
         );
         $recipe = new Recipe($attributes);
         $recipe->save();
@@ -101,9 +101,14 @@ class RecipeController extends BaseController {
     }
 
     public static function destroy($id) {
+        
         $recipe = new Recipe(array('id' => $id));
+        $recipeIngredient = new RecipeIngredient(array('recipe_id' => $id));
 
+        $recipeIngredient->destroy();
         $recipe->destroy();
+        
+        
 
         Redirect::to('/recipes', array('message' => 'Resepti poistettu onnistuneesti!'));
     }

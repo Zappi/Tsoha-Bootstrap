@@ -1,5 +1,7 @@
 {% extends "base.html" %} {% block content %}
 
+{% if user_logged_in %}
+
 {% if errors %} 
 <div class="alert alert-danger">
     <ul>
@@ -55,5 +57,13 @@
 
 
 </form>
+
+{% endif %}
+
+{% if not user_logged_in %}
+<h4 class="alert alert-info">Kirjaudu sisään lisätäksesi reseptin </h4>
+{% endif %}
+
+
 
 {% endblock %}

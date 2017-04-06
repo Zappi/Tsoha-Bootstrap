@@ -83,7 +83,7 @@ class RecipeController extends BaseController {
         $attributes = array(
             'name' => $params['name'],
             'method' => $params['method'],
-            'username' => '#KORJAATÄMÄ'
+            'username' => 'Zappi'
         );
 
         $recipe = new Recipe($attributes);
@@ -110,7 +110,7 @@ class RecipeController extends BaseController {
         
         
 
-        Redirect::to('/recipes', array('message' => 'Resepti poistettu onnistuneesti!'));
+        Redirect::to('/recipes', array('deletemessage' => 'Resepti poistettu onnistuneesti!'));
     }
 
 }

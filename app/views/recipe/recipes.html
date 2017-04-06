@@ -1,6 +1,14 @@
 {% extends "base.html" %} {% block content %} {% import "macros/forms.html" as forms %}
 <h1>Reseptit</h1>
 
+{% if deletemessage %} 
+<div class="alert alert-success">
+
+    <h3>{{deletemessage}}</h3>
+   
+</div>
+{% endif %}
+
 <p>
     <a href="{{base_path}}/recipes/addrecipe" class="btn btn-success">Lisää resepti</a>
 </p>

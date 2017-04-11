@@ -9,11 +9,13 @@
 
 <h1> {{recipe.name}}</h1>
 
+<h4> Kategoria: {{recipe.category_id}} </h4>
+
 <h3> Tarvikkeet </h3>
 
-<ul class="list-unstyled" style="width:10%; float:left">
+<ul class="list-unstyled" style="width:40%; float:left">
     {% for a in recipe.ingredient %}
-    <li>{{a.ingredientname}} {{a.amount}}</li>
+    <li>{{a.ingredientname}}, määrä: {{a.amount}}</li>
     {% endfor %}
 </ul>
 

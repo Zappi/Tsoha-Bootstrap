@@ -2,7 +2,7 @@
 
 class Recipe extends BaseModel {
 
-    public $id, $member_id, $category_id, $name, $addtime, $method, $username, /* validators, */ $ingredient, $ingredientname;
+    public $id, $member_id, $category_id, $name, $addtime, $method, $username, $validators, $ingredient, $ingredientname;
 
     //Konstruktori
     public function __construct($attributes) {
@@ -105,10 +105,11 @@ class Recipe extends BaseModel {
 
     public function save() {
         
-        $query = DB::connection()->prepare('INSERT INTO Recipe (name, addtime, method, username) VALUES
-        (:name, CURRENT_TIMESTAMP, :method, :username) RETURNING id');
+        $query = DB::connection()->prepare('INSERT INTO Recipe (category_id, name, addtime, method, username) VALUES
+        (:category_id, :name, CURRENT_TIMESTAMP, :method, :username) RETURNING id');
 
         $query->execute(array(
+            'category_id' => $this->category_id,
             'name' => $this->name,
             'method' => $this->method,
             'username' => $this->username));
@@ -142,11 +143,24 @@ class Recipe extends BaseModel {
     }
 
     public function validate_name() {
-        return parent::validate_string(" " . $this->name);
+        $errors = array();
+        if($this->name == '') {
+            $errors[] = 'Reseptin nimi ei saa olla tyhjä!';
+        } else if(count($this->name) < 4) {
+            $errors[] = 'Reseptin nimen tulee olla vähintään neljä merkkiä';
+         }
+         
+        return $errors;
     }
 
     public function validate_method() {
-        return parent::validate_string($this->method);
+        $errors = array();
+        if($this->method =='') {
+            $errors[] = 'Reseptillä tulee olla ohje!';
+        } else if(count($this->method) < 10) {
+            $errors[] = 'Reseptin tulee olla vähintään 10 merkkiä pitkä.';
+        } 
+        return $errors;
     }
-
+    
 }

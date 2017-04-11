@@ -6,8 +6,6 @@ class IngredientController extends BaseController{
 
         $ingredients = Ingredient::all();
 
-        View::make('/recipes/addrecipe.html', array('ingredients' => $ingredients));
-
-
+        View::make('/recipe/addrecipe.html', array('ingredients' => $ingredients));
     }
  }

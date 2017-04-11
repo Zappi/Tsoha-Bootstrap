@@ -22,8 +22,6 @@ class Ingredient extends BaseModel {
             ));
         }
         
-        var_dump($ingredients);
-        
         return $ingredients;
         }
     }

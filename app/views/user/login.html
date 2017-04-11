@@ -8,6 +8,16 @@
 </div>
 {% endif %}
 
+{% if message %}
+
+<div class="alert alert-success">
+
+    <h4> {{message}} </h4>
+    
+</div>
+
+{% endif %}
+
 <h1> Kirjaudu sisään </h1>
 
 <form method="post" action="{{base_path}}/login">

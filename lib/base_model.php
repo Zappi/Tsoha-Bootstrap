@@ -20,23 +20,27 @@
       $errors = array();
 
       foreach($this->validators as $validator){
-        // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
+          $errors = array_merge($errors, $this->{$validator}());
       }
 
-      return $errors;
+      return array_filter($errors);
     }
 
-    public function validate_string($name) {
+    public function validate_name($name) {
         $errors = array();
 
         if($name == null) {
-          $errors[] = "Merkkijono ei voi olla tyhjä.";
+            return $name . " ei voi olla tyhjä";
         }
 
         if(strlen($name) < 3) {
-            $errors[] = 'Merkkijono tulee olla vähintään 3 merkkiä pitkä!';
+            $errors[] =  $name . ' tulee olla vähintään 3 merkkiä pitkä!';
+            return $errors;
         }
-        return $errors;
+        
+        
+        
+        return null;
     }
     
 

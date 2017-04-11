@@ -2,12 +2,12 @@
 
 class Recipe extends BaseModel {
 
-    public $id, $member_id, $category_id, $name, $addtime, $method, $username, $validators, $ingredient, $ingredientname;
+    public $id, $member_id, $category_id, $name, $addtime, $method, $username,$ingredient, $ingredientname;
 
     //Konstruktori
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name', 'validate_method');
+         $this->validators = array('validate_name');
     }
 
     public static function all() {
@@ -48,8 +48,6 @@ class Recipe extends BaseModel {
                 'username' => $row['username'],
             ));
             $recipe->ingredient = $kivamuuttuja;
-
-            var_dump($recipe);
 
             return $recipe;
         }
@@ -104,7 +102,7 @@ class Recipe extends BaseModel {
     }
 
     public function save() {
-        
+
         $query = DB::connection()->prepare('INSERT INTO Recipe (category_id, name, addtime, method, username) VALUES
         (:category_id, :name, CURRENT_TIMESTAMP, :method, :username) RETURNING id');
 
@@ -116,7 +114,6 @@ class Recipe extends BaseModel {
 
         $row = $query->fetch();
         $this->id = $row['id'];
-        
     }
 
     public function update() {
@@ -133,34 +130,11 @@ class Recipe extends BaseModel {
         $query->execute(array('id' => $this->id));
     }
 
-    public function errors() {
-        $errors = array();
-
-        foreach ($this->validators as $validator) {
-            $errors = array_merge($errors, $this->{$validator}());
-        }
-        return $errors;
-    }
-
     public function validate_name() {
         $errors = array();
-        if($this->name == '') {
-            $errors[] = 'Reseptin nimi ei saa olla tyhjä!';
-        } else if(count($this->name) < 4) {
-            $errors[] = 'Reseptin nimen tulee olla vähintään neljä merkkiä';
-         }
-         
+        $errors[] = parent::validate_name($this->name);
+        $errors[] = parent::validate_name($this->method);
         return $errors;
     }
 
-    public function validate_method() {
-        $errors = array();
-        if($this->method =='') {
-            $errors[] = 'Reseptillä tulee olla ohje!';
-        } else if(count($this->method) < 10) {
-            $errors[] = 'Reseptin tulee olla vähintään 10 merkkiä pitkä.';
-        } 
-        return $errors;
-    }
-    
 }

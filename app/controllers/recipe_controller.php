@@ -31,8 +31,9 @@ class RecipeController extends BaseController {
     public static function store() {
         self::check_logged_in();
         $params = $_POST;
+        $errors = array();
         
-         $category = $params['category'];
+        $category = $params['category'];
 
         $attributes = array(
             'category_id' => $category,
@@ -41,7 +42,6 @@ class RecipeController extends BaseController {
             'username' => 'Zappi'
         );
         $recipe = new Recipe($attributes);
-        $recipe->save();
 
         $ingredients = $params['ingredients'];
         $amounts = $params['amounts'];
@@ -64,15 +64,14 @@ class RecipeController extends BaseController {
         }
 
 
-        $errors = $recipe->errors();
+        $errors = array_merge($errors, $recipe->errors());
 
 
-        if (count($errors) == 0) {
-            //Recipe works
-
-            Redirect::to('/recipepage/' . $recipe->id, array('message' => 'Resepti lisätty onnistuneesti'));
+        if (!$errors) {
+            $recipe->save();
+            Redirect::to('/recipepage/' . $recipe->id, array('message' => 'Resepti lisätty onnistuneesti!'));
+            
         } else {
-            //Something wrong with recipe
             View::make('recipe/addrecipe.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
@@ -81,16 +80,19 @@ class RecipeController extends BaseController {
         self::check_logged_in();
         $recipe = Recipe::find($id);
         $ingredients = Ingredient::all();
-        View::make('recipe/edit.html', array('attributes' => $recipe, 'ingredients' => $ingredients));
+        $categories = Category::all();
+        View::make('recipe/edit.html', array('attributes' => $recipe, 'ingredients' => $ingredients, 'categories' => $categories));
     }
 
     public static function update($id) {
         self::check_logged_in();
         $params = $_POST;
         
+        
+        $category = $params['category'];
 
         $attributes = array(
-            'category_id' => $params['category_id'],
+            'category_id' => $category,
             'name' => $params['name'],
             'method' => $params['method'],
             'username' => 'Zappi'
@@ -103,7 +105,7 @@ class RecipeController extends BaseController {
 
 
         if (count($errors) > 0) {
-            View::make('recipepage/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('recipe/edit.html', array('errors' => $errors, 'attributes' => $attributes));
         } else {
             $recipe->update();
             Redirect::to('/recipepage/' . $recipe->id, array('message' => 'Reseptiä muokattu onnistuneesti!'));

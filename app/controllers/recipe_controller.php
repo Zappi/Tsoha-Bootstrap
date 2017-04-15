@@ -14,8 +14,9 @@ class RecipeController extends BaseController {
         //$ingredients = Recipe::findIngredientsBetter($id);
         //$amount = $ingredients[0];
         //$ingredients = $ingredients[1];
+        $category = Category::find($recipe->category_id);
 
-        View::make('recipe/recipepage.html', array('recipe' => $recipe, /* 'ingredients' => $ingredients/*, 'amounts' => $amount */));
+        View::make('recipe/recipepage.html', array('recipe' => $recipe, 'category' => $category /* 'ingredients' => $ingredients/*, 'amounts' => $amount */));
     }
 
     public static function create() {
@@ -39,7 +40,7 @@ class RecipeController extends BaseController {
             'category_id' => $category,
             'name' => $params['name'],
             'method' => $params['method'],
-            'username' => 'Zappi'
+            'username' => self::get_user_logged_in()->username
         );
         $recipe = new Recipe($attributes);
 

@@ -19,8 +19,12 @@
             <th>Reseptin nimi</th>
             <th>Lisäysaika</th>
             <th>Lisääjä</th>
+            {% if user_logged_in %}
+            
             <th>Muokkaa</th>
             <th>Poista</th>
+            
+            {% endif %}
         </tr>
     </thead>
 
@@ -31,11 +35,16 @@
             <td>{{recipe.addtime}}</td>
             <td>{{recipe.username}}</td>
           
+            
+            {% if user_logged_in %}
+            
             <td>{{forms.edit_button("#{base_path}/recipepage/#{recipe.id}/edit")}}
             </td>
                 
             <td>{{forms.destroy_button("#{base_path}/recipepage/#{recipe.id}/destroy")}}
             </td>
+            
+            {% endif %}
             
         </tr>
       {% endfor %}

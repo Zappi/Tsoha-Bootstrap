@@ -37,3 +37,5 @@ INSERT INTO Recipe (category_id, name, addtime, method, username) VALUES (2, 'Ma
 INSERT INTO RecipeIngredient (recipe_id, ingredient_id, amount) VALUES (1,1, '2kpl');
 INSERT INTO RecipeIngredient (recipe_id, ingredient_id, amount) VALUES (1,2, '400g');
 
+
+INSERT INTO Review (member_id, recipe_id, addtime, message) VALUES (1, 1, CURRENT_TIMESTAMP, 'Tämä on testi kommentti. Jeee.')

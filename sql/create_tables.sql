@@ -26,7 +26,7 @@ CREATE TABLE Recipe (
 CREATE TABLE Review (
     member_id INTEGER REFERENCES Member(id),
     recipe_id INTEGER REFERENCES Recipe(id),
-    username varchar(15) NOT NULL,
+    /*username varchar(15) NOT NULL,*/
     addtime TIMESTAMP,
     message varchar(400) NOT NULL
 );

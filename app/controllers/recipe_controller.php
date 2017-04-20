@@ -15,8 +15,11 @@ class RecipeController extends BaseController {
         //$amount = $ingredients[0];
         //$ingredients = $ingredients[1];
         $category = Category::find($recipe->category_id);
+        $reviews = Review::find($id);
 
-        View::make('recipe/recipepage.html', array('recipe' => $recipe, 'category' => $category /* 'ingredients' => $ingredients/*, 'amounts' => $amount */));
+        var_dump($reviews); //POISTA TÄMÄ KUN TOIMII
+        
+        View::make('recipe/recipepage.html', array('recipe' => $recipe, 'category' => $category, 'reviews' => $reviews));
     }
 
     public static function create() {
@@ -85,7 +88,7 @@ class RecipeController extends BaseController {
         $category = Category::find($recipe->category_id);
         $allCategories = Category::all();
         
-        View::make('recipe/edit.html', array('attributes' => $recipe,'thisRecipeIngredients' => $thisRecipesIngredients, 'ingredients' => $allIngredients, 'category' => $category, 'categories' => $allCategories));
+        View::make('recipe/edit.html', array('attributes' => $recipe,'thisRecipesIngredients' => $thisRecipesIngredients, 'ingredients' => $allIngredients, 'category' => $category, 'categories' => $allCategories));
     }
 
     public static function update($id) {

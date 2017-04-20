@@ -50,7 +50,6 @@
         <select class="form-control" name="category"> 
            <!-- <option value="-1"></option> -->
             {% for category in categories %}
-            <option>{{attributes.category}}</option>
             <option value="{{category.id}}">{{category.categoryname}}</option>
             {% endfor %}
         </select>

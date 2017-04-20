@@ -38,9 +38,32 @@
 <h3>Ohjeet</h3>
 <p>{{recipe.method}}</p>
 
-<p>Tänne tulee sitten kivasti kommenttiosio. </p>
-
 
 <h3>Kommentit</h3>
+
+<ul class="list-unstyled">
+    {% for review in reviews %}
+    <li> {{review.message}} </li>
+    {% endfor %}
+</ul>
+
+
+
+<form method="post">
+    <div class="form-group">
+        {% if user_logged_in %}
+        <label> Kommentti </label>
+        <textarea class="form-control" name="comment"></textarea>
+        <input type="hidden" name="recipe_id" value="{{recipe_id}}">
+        <button type="submit" class="btn btn-primary">Lähetä</button>
+        {% else %}
+        <div class="alert alert-info">
+        <strong>Huom!</strong> Sinun tulee olla kirjautunut sisään kommentointia varten!
+        </div>
+        {% endif %}
+    </div>
+</form>
+
+
 
 {% endblock %}

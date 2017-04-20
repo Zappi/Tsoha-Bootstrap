@@ -37,13 +37,14 @@ class RecipeController extends BaseController {
         $category = $params['category'];
 
         $attributes = array(
-            'category_id' => $category,
             'name' => $params['name'],
             'method' => $params['method'],
+            'category_id' => $category,
             'username' => self::get_user_logged_in()->username
         );
         $recipe = new Recipe($attributes);
-
+        $recipe->save();
+        
         $ingredients = $params['ingredients'];
         $amounts = $params['amounts'];
 
@@ -69,11 +70,10 @@ class RecipeController extends BaseController {
 
 
         if (!$errors) {
-            $recipe->save();
             Redirect::to('/recipepage/' . $recipe->id, array('message' => 'Resepti lisätty onnistuneesti!'));
             
         } else {
-            View::make('recipe/addrecipe.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('recipe/addrecipe.html', array('errors' => $errors, 'ingredients' => $ingredients));
         }
     }
 

@@ -132,8 +132,8 @@ class Recipe extends BaseModel {
 
     public function validate_name() {
         $errors = array();
-        $errors[] = parent::validate_name($this->name);
-        $errors[] = parent::validate_name($this->method);
+        $errors[] = parent::validate_name('Reseptin nimi');
+        $errors[] = parent::validate_name('Resepti');
         return $errors;
     }
 

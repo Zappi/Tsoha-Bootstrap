@@ -56,6 +56,11 @@ $routes->post('/logout', function() {
     UserController::logout();
 });
 
+$routes->post('/recipepage/:id', function($id) {
+    ReviewController::store($id);
+});
+
+
 
 
 

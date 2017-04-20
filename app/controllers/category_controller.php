@@ -8,4 +8,8 @@ class CategoryController extends BaseController{
 
         View::make('/recipe/addrecipe.html', array('categories' => $categories));
     }
+    
+    public static function create() {
+        
+    }
 }

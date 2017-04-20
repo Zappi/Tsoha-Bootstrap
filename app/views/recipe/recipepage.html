@@ -43,7 +43,9 @@
 
 <ul class="list-unstyled">
     {% for review in reviews %}
-    <li> {{review.message}} </li>
+    <li> <strong>Kommentti:</strong> {{review.message}} <br> Lähettäjä: {{review.username}} </li>
+    <br>
+    
     {% endfor %}
 </ul>
 
@@ -53,7 +55,7 @@
     <div class="form-group">
         {% if user_logged_in %}
         <label> Kommentti </label>
-        <textarea class="form-control" name="comment"></textarea>
+        <textarea class="form-control" name="message"></textarea>
         <input type="hidden" name="recipe_id" value="{{recipe_id}}">
         <button type="submit" class="btn btn-primary">Lähetä</button>
         {% else %}

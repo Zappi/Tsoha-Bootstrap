@@ -37,7 +37,7 @@ class Recipe extends BaseModel {
         $row = $query->fetch();
 
         if ($row) {
-            $kivamuuttuja = Recipe::findIngredientsBetter($id);
+            $ingredientFinder = Recipe::findIngredientsBetter($id);
             $recipe = new Recipe(array(
                 'id' => $row['id'],
                 'member_id' => $row['member_id'],
@@ -47,7 +47,7 @@ class Recipe extends BaseModel {
                 'method' => $row['method'],
                 'username' => $row['username'],
             ));
-            $recipe->ingredient = $kivamuuttuja;
+            $recipe->ingredient = $ingredientFinder;
 
             return $recipe;
         }

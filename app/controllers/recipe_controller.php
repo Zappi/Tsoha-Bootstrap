@@ -11,9 +11,6 @@ class RecipeController extends BaseController {
 
     public static function show($id) {
         $recipe = Recipe::find($id);
-        //$ingredients = Recipe::findIngredientsBetter($id);
-        //$amount = $ingredients[0];
-        //$ingredients = $ingredients[1];
         $category = Category::find($recipe->category_id);
         $reviews = Review::find($id);
 

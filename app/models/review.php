@@ -6,6 +6,7 @@ class Review extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name', 'validate_string_length');
     }
 
     public static function find($recipe_id) {
@@ -49,6 +50,20 @@ class Review extends BaseModel {
 
     public static function destroy() {
         
+    }
+    
+    
+    public function validate_name() {
+        $errors = array();
+        $errors[] = parent::validate_name($this->message, 'Kommentti');
+        return $errors;
+    }
+    
+    public function validate_string_length() {
+        $errors = array();
+        $errors[] = parent::validate_string_length($this->message,'Kommentin', 10);
+        
+        return $errors;
     }
 
 }

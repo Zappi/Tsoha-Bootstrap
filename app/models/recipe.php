@@ -7,7 +7,7 @@ class Recipe extends BaseModel {
     //Konstruktori
     public function __construct($attributes) {
         parent::__construct($attributes);
-         $this->validators = array('validate_name');
+         $this->validators = array('validate_name', 'validate_string_length');
     }
 
     public static function all() {
@@ -132,8 +132,15 @@ class Recipe extends BaseModel {
 
     public function validate_name() {
         $errors = array();
-        $errors[] = parent::validate_name('Reseptin nimi');
-        $errors[] = parent::validate_name('Resepti');
+        $errors[] = parent::validate_name($this->name, 'Reseptin nimi');
+        $errors[] = parent::validate_name($this->method, 'Resepti');
+        return $errors;
+    }
+    
+    public function validate_string_length() {
+        $errors = array();
+        $errors[] = parent::validate_string_length($this->name,'Reseptin nimen', 4);
+        $errors[] = parent::validate_string_length($this->method,'Reseptin', 10);
         return $errors;
     }
 

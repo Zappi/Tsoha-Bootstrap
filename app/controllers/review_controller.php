@@ -18,21 +18,13 @@ class ReviewController extends BaseController {
         );
         $review = new Review($attributes);
         
-        var_dump($review);
+        $errors = $review->errors();
         
-        $review->save();
-            Redirect::to('/recipepage/' . $review->recipe_id, array('message' => 'Kommentti lisätty onnistuneesti!'));
-
-
-       /* $errors = array_merge($errors, $review->errors());
-
-
-        if (!$errors) {
+        if(count($errors) == 0) {
             $review->save();
-            Redirect::to('/recipepage/' . $recipe->id, array('message' => 'Kommentti lisätty onnistuneesti!'));
-            
+            Redirect::to('/recipepage/' . $id, array('message' => 'Kommentti lisätty onnistuneesti.'));
         } else {
-            View::make('recipe/recpiepage.html', array('errors' => $errors, 'attributes' => $attributes));
-        } */
+            Redirect::to('/recipepage/' . $id, array('errors' => $errors));
+        }
     } 
 }

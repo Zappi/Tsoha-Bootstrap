@@ -26,21 +26,22 @@
       return array_filter($errors);
     }
 
-    public function validate_name($name) {
-        $errors = array();
+    public function validate_name($name, $varName) {
+        $error = null;
 
         if($name == null) {
-            return $name . " ei voi olla tyhjä";
+            $error = $varName . " ei voi olla tyhjä";
         }
-
-        if(strlen($name) < 3) {
-            $errors[] =  $name . ' tulee olla vähintään 3 merkkiä pitkä!';
-            return $errors;
+        return $error;
+    }
+    
+    public function validate_string_length($name, $varName, $length) {
+        $error = null;
+        
+        if(strlen($name) < $length) {
+            $error = $varName . ' pituuden tulee olla vähintään ' . $length . ' pitkä.';
         }
-        
-        
-        
-        return null;
+        return $error;
     }
     
 

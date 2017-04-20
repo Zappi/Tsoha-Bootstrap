@@ -2,6 +2,8 @@
 
 class RecipeController extends BaseController {
 
+    static $failed = false;
+
     public static function recipes() {
 
         $recipes = Recipe::all();
@@ -15,7 +17,7 @@ class RecipeController extends BaseController {
         $reviews = Review::find($id);
 
         var_dump($reviews); //POISTA TÄMÄ KUN TOIMII
-        
+
         View::make('recipe/recipepage.html', array('recipe' => $recipe, 'category' => $category, 'reviews' => $reviews));
     }
 
@@ -24,8 +26,8 @@ class RecipeController extends BaseController {
         $recipes = Recipe::all();
         $ingredients = Ingredient::all();
         $categories = Category::all();
-        
-        
+
+
         View::make('recipe/addrecipe.html', array('recipes' => $recipes, 'ingredients' => $ingredients, 'categories' => $categories));
     }
 
@@ -33,7 +35,7 @@ class RecipeController extends BaseController {
         self::check_logged_in();
         $params = $_POST;
         $errors = array();
-        
+
         $category = $params['category'];
 
         $attributes = array(
@@ -44,7 +46,6 @@ class RecipeController extends BaseController {
         );
         $recipe = new Recipe($attributes);
         $recipe->save();
-        
         $ingredients = $params['ingredients'];
         $amounts = $params['amounts'];
 
@@ -65,15 +66,15 @@ class RecipeController extends BaseController {
             $recipeIngredient->save();
         }
 
+        $failed = true;
+        $errors = $recipe->errors();
 
-        $errors = array_merge($errors, $recipe->errors());
+        if (count($errors) == 0) {
 
-
-        if (!$errors) {
             Redirect::to('/recipepage/' . $recipe->id, array('message' => 'Resepti lisätty onnistuneesti!'));
-            
         } else {
-            View::make('recipe/addrecipe.html', array('errors' => $errors, 'ingredients' => $ingredients));
+            RecipeController::destroy($recipe->id);
+            View::make('recipe/addrecipe.html', array('errors' => $errors, 'ingredients' => Ingredient::all(), 'categories' => Category::all()));
         }
     }
 
@@ -84,15 +85,15 @@ class RecipeController extends BaseController {
         $allIngredients = Ingredient::all();
         $category = Category::find($recipe->category_id);
         $allCategories = Category::all();
-        
-        View::make('recipe/edit.html', array('attributes' => $recipe,'thisRecipesIngredients' => $thisRecipesIngredients, 'ingredients' => $allIngredients, 'category' => $category, 'categories' => $allCategories));
+
+        View::make('recipe/edit.html', array('attributes' => $recipe, 'thisRecipesIngredients' => $thisRecipesIngredients, 'ingredients' => $allIngredients, 'category' => $category, 'categories' => $allCategories));
     }
 
     public static function update($id) {
         self::check_logged_in();
         $params = $_POST;
-        
-        
+
+
         $category = $params['category'];
 
         $attributes = array(
@@ -104,6 +105,7 @@ class RecipeController extends BaseController {
 
         $recipe = new Recipe($attributes);
         $recipe->id = $id;
+        $recipe->update();
 
         $errors = $recipe->errors();
 
@@ -111,7 +113,7 @@ class RecipeController extends BaseController {
         if (count($errors) > 0) {
             View::make('recipe/edit.html', array('errors' => $errors, 'attributes' => $attributes));
         } else {
-            $recipe->update();
+
             Redirect::to('/recipepage/' . $recipe->id, array('message' => 'Reseptiä muokattu onnistuneesti!'));
         }
     }
@@ -125,8 +127,11 @@ class RecipeController extends BaseController {
         $recipe->destroy();
 
 
-
-        Redirect::to('/recipes', array('deletemessage' => 'Resepti poistettu onnistuneesti!'));
+        if ($failed = false) {
+            Redirect::to('/recipes');
+        } else {
+            $failed = false;
+        }
     }
 
 }

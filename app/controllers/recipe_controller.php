@@ -16,7 +16,7 @@ class RecipeController extends BaseController {
         $category = Category::find($recipe->category_id);
         $reviews = Review::find($id);
 
-        var_dump($reviews); //POISTA TÄMÄ KUN TOIMII
+      
 
         View::make('recipe/recipepage.html', array('recipe' => $recipe, 'category' => $category, 'reviews' => $reviews));
     }
@@ -73,7 +73,7 @@ class RecipeController extends BaseController {
 
             Redirect::to('/recipepage/' . $recipe->id, array('message' => 'Resepti lisätty onnistuneesti!'));
         } else {
-            RecipeController::destroy($recipe->id);
+            RecipeController::destroyIfNotValid($recipe->id);
             View::make('recipe/addrecipe.html', array('errors' => $errors, 'ingredients' => Ingredient::all(), 'categories' => Category::all()));
         }
     }
@@ -113,9 +113,18 @@ class RecipeController extends BaseController {
         if (count($errors) > 0) {
             View::make('recipe/edit.html', array('errors' => $errors, 'attributes' => $attributes));
         } else {
-
             Redirect::to('/recipepage/' . $recipe->id, array('message' => 'Reseptiä muokattu onnistuneesti!'));
         }
+    }
+    
+    public static function destroyIfNotValid($id) {
+        self::check_logged_in();
+        $recipe = new Recipe(array('id' => $id));
+        $recipeIngredient = new RecipeIngredient(array('recipe_id' => $id));
+
+        $recipeIngredient->destroy();
+        $recipe->destroy();
+        
     }
 
     public static function destroy($id) {
@@ -126,12 +135,6 @@ class RecipeController extends BaseController {
         $recipeIngredient->destroy();
         $recipe->destroy();
 
-
-        if ($failed = false) {
-            Redirect::to('/recipes');
-        } else {
-            $failed = false;
-        }
+        Redirect::to('/recipes');
     }
-
 }

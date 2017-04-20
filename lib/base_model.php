@@ -39,7 +39,7 @@
         $error = null;
         
         if(strlen($name) < $length) {
-            $error = $varName . ' pituuden tulee olla vähintään ' . $length . ' pitkä.';
+            $error = $varName . ' pituuden tulee olla vähintään ' . $length . ' merkkiä pitkä.';
         }
         return $error;
     }

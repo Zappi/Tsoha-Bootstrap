@@ -80,9 +80,12 @@ class RecipeController extends BaseController {
     public static function edit($id) {
         self::check_logged_in();
         $recipe = Recipe::find($id);
-        $ingredients = Ingredient::all();
-        $categories = Category::all();
-        View::make('recipe/edit.html', array('attributes' => $recipe, 'ingredients' => $ingredients, 'categories' => $categories));
+        $thisRecipesIngredients = Recipe::findIngredientsBetter($id);
+        $allIngredients = Ingredient::all();
+        $category = Category::find($recipe->category_id);
+        $allCategories = Category::all();
+        
+        View::make('recipe/edit.html', array('attributes' => $recipe,'thisRecipeIngredients' => $thisRecipesIngredients, 'ingredients' => $allIngredients, 'category' => $category, 'categories' => $allCategories));
     }
 
     public static function update($id) {
@@ -96,7 +99,7 @@ class RecipeController extends BaseController {
             'category_id' => $category,
             'name' => $params['name'],
             'method' => $params['method'],
-            'username' => 'Zappi'
+            'username' => self::get_user_logged_in()->username
         );
 
         $recipe = new Recipe($attributes);

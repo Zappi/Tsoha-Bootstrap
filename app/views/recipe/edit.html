@@ -18,7 +18,7 @@
         <input type="text" name="name" value="{{attributes.name}}" class="form-control">
 
         <div class="form-group">
-            <label>Raaka-aineet</label> <br>{%for i in 0..10%}
+            <label>Raaka-aineet</label> <br>{%for i in 0..15%}
 
             <select name="ingredient[]">
                 <option></option>
@@ -36,7 +36,9 @@
             <label>Kategoria</label>
         <select class="form-control" name="category"> 
            <!-- <option value="-1"></option> -->
-            {% for category in categories %}
+           
+           <option value="{{attributes.category_id}}">{{category.categoryname}}</option>
+            {% for category in categories %} 
             <option value="{{category.id}}">{{category.categoryname}}</option>
             {% endfor %}
         </select>
@@ -44,7 +46,7 @@
 
         <div class="form-group">
             <label for="resepti">Resepti</label>
-            <textarea class="form-control" name="method" value="{{attributes.method}}" rows="8" id="resepti"></textarea>
+            <textarea class="form-control" name="method" value="{{attributes.method}}" rows="8" id="resepti">{{attributes.method}}</textarea>
         </div>
 
         <div class="form-group">

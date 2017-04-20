@@ -38,7 +38,11 @@
                 <ul class="nav navbar-nav">
                     <!-- Navigaation linkit -->
                     <li><a href="{{base_path}}/categories">Kategoriat</a></li>
+                    
+                    {% if user_logged_in %}
                     <li><a href="{{base_path}}/recipes/addrecipe">Lisää resepti</a></li>
+                    {% endif %}
+                    
                     <li><a href="{{base_path}}/recipes">Kaikki reseptit</a>
                         <li>
                 </ul>

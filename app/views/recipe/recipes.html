@@ -32,7 +32,7 @@
         {% for recipe in recipes%}
         <tr>
             <td><a href="{{base_path}}/recipepage/{{recipe.id}}">{{recipe.name}}</a></td>
-            <td>{{recipe.addtime}}</td>
+            <td>{{recipe.addtime|date}}</td>
             <td>{{recipe.username}}</td>
           
             

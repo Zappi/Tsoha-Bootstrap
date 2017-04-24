@@ -69,5 +69,10 @@ class Review extends BaseModel {
         
         return $errors;
     }
-
+    
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Review SET message = :message');
+        $query->execute(array (
+            'message' => $this->message));
+    }
 }

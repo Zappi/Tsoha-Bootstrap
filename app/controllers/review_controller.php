@@ -38,22 +38,29 @@ class ReviewController extends BaseController {
     
     public static function edit($id) {
         $review = Review::find($id);
-        View::make('review/edit.html', array('attributes' => $review));
+        View::make('reviewedit.html', array('attributes' => $review));
     }
     
-    public static function update($id) {
+    public static function update($id, $reviewid) {
+        self::check_logged_in();
         $params = $_POST;
         
         $attributes = array( 
             'id' => $id,
-            'member_id' => $params['member_id'],
-            'recipe_id' => $params['recipe_id'],
-            'username' => $params['username'],
-            'addtime' => $params['addtime'],
             'message' => $params['message']
         );
         
-        $revieew = new Review($attributes);
-        //todo $errors = $review->errors();
+        $review = new Review($attributes);
+        $review->id = $reviewid;
+        $review->update();
+        
+        
+        $errors = $review->errors();
+        
+        if(count($errors) > 0) {
+            View::make('reviewedit.html', array('errors' => $errors, 'attributes' => $attributes));
+        } else {
+            Redirect::to('/recipepage/' . $id, array('message' => 'Kommenttia muokattu onnistuneesti!'));
+        }
     }
 }

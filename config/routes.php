@@ -64,6 +64,14 @@ $routes->post('/recipepage/:id/destroyreview/:reviewid', function($id, $reviewid
     ReviewController::delete($id, $reviewid);
 });
 
+$routes->get('/recipepage/:id/editreview/:reviewid', function($id, $reviewid) {
+    ReviewController::edit($id, $reviewid);
+});
+
+$routes->post('/recipepage/:id/editreview/:reviewid', function($id, $reviewid) {
+    ReviewController::update($id, $reviewid);
+});  
+
 
 
 

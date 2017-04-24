@@ -26,5 +26,34 @@ class ReviewController extends BaseController {
         } else {
             Redirect::to('/recipepage/' . $id, array('errors' => $errors));
         }
-    } 
+    }
+    
+    public static function delete($recipeid, $reviewid) {
+        self::check_logged_in();
+        $review = new Review(array('id' => $reviewid));
+        $review->destroy();
+        
+        Redirect::to('/recipepage/' . $recipeid);
+    }
+    
+    public static function edit($id) {
+        $review = Review::find($id);
+        View::make('review/edit.html', array('attributes' => $review));
+    }
+    
+    public static function update($id) {
+        $params = $_POST;
+        
+        $attributes = array( 
+            'id' => $id,
+            'member_id' => $params['member_id'],
+            'recipe_id' => $params['recipe_id'],
+            'username' => $params['username'],
+            'addtime' => $params['addtime'],
+            'message' => $params['message']
+        );
+        
+        $revieew = new Review($attributes);
+        //todo $errors = $review->errors();
+    }
 }

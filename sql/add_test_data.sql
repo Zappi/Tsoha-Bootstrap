@@ -38,4 +38,4 @@ INSERT INTO RecipeIngredient (recipe_id, ingredient_id, amount) VALUES (1,1, '2k
 INSERT INTO RecipeIngredient (recipe_id, ingredient_id, amount) VALUES (1,2, '400g');
 
 
-INSERT INTO Review (member_id, recipe_id, username, addtime, message) VALUES (1, 1, 'Zappi', CURRENT_TIMESTAMP, 'Tämä on testi kommentti. Jeee.')
+INSERT INTO Review (member_id, recipe_id, username, addtime, message) VALUES (1, 1, 'Zappi', CURRENT_TIMESTAMP, 'Tämä on testi kommentti. Jeee.');

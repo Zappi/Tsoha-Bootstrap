@@ -1,4 +1,4 @@
-{% macro destroy_button(action, text) %}
+{% macro destroy_button(action, action2, text) %}
 <form method="post" action="{{action}}" style="display: inline-block;">
   <button type="submit" class="btn btn-danger">                                 
       {{text|default('Poista')}}</button>
@@ -6,9 +6,24 @@
 {% endmacro %}
 
 
-{% macro edit_button(action, text) %}
+{% macro edit_button(action, action2,  text) %}
 <form method="get" action="{{action}}" style="display: inline-block;">      
     <button type="submit" class="btn btn-default">                              
+        {{text|default('Muokkaa')}}</button>
+</form>
+{% endmacro %}
+
+
+{% macro destroy_button_smaller(action, action2, text) %}
+<form method="post" action="{{action}}" style="display: inline-block;">
+  <button type="submit" class="btn btn-danger" style="font-size: 12px;padding: 5px;margin-right: 5px;">                                 
+      {{text|default('Poista')}}</button>
+</form>
+{% endmacro %}
+
+{% macro edit_button_smaller(action, action2,  text) %}
+<form method="get" action="{{action}}" style="display: inline-block;">      
+    <button type="submit" class="btn btn-default" style="font-size: 12px;padding: 5px;margin-right: 5px;">                              
         {{text|default('Muokkaa')}}</button>
 </form>
 {% endmacro %}

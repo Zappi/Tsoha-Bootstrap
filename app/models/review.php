@@ -2,7 +2,7 @@
 
 class Review extends BaseModel {
 
-    public $member_id, $recipe_id, $username, $addtime, $message;
+    public $id, $member_id, $recipe_id, $username, $addtime, $message;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -19,6 +19,7 @@ class Review extends BaseModel {
         if ($rows) {
             foreach ($rows as $row) {
                 $reviews[] = new Review(array(
+                    'id' => $row['id'],
                     'member_id' => $row['member_id'],
                     'addtime' => $row['addtime'],
                     'username' => $row['username'],
@@ -37,7 +38,7 @@ class Review extends BaseModel {
     public function save() {
 
         $query = DB::connection()->prepare('INSERT INTO Review (member_id, recipe_id, username, addtime, message) VALUES 
-        (:member_id, :recipe_id, :username, CURRENT_TIMESTAMP, :message)');
+        (:member_id, :recipe_id, :username, CURRENT_TIMESTAMP, :message) RETURNING id');
 
         $query->execute(array(
             'member_id' => $this->member_id,
@@ -46,10 +47,13 @@ class Review extends BaseModel {
             'message' => $this->message));
 
         $row = $query->fetch();
+        $this->id = $row['id'];
     }
 
-    public static function destroy() {
+    public function destroy() {
         
+        $query = DB::connection()->prepare('DELETE FROM Review WHERE id = :id');
+        $query->execute(array('id' => $this->id));
     }
     
     
@@ -61,7 +65,7 @@ class Review extends BaseModel {
     
     public function validate_string_length() {
         $errors = array();
-        $errors[] = parent::validate_string_length($this->message,'Kommentin', 10);
+        $errors[] = parent::validate_string_length($this->message,'Kommentin', 5);
         
         return $errors;
     }

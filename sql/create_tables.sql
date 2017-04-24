@@ -24,6 +24,7 @@ CREATE TABLE Recipe (
 );
 
 CREATE TABLE Review (
+    id SERIAL PRIMARY KEY,
     member_id INTEGER REFERENCES Member(id),
     recipe_id INTEGER REFERENCES Recipe(id),
     username varchar(15) NOT NULL,

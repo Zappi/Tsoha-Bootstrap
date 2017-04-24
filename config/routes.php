@@ -1,12 +1,12 @@
 <?php
 
-  $routes->get('/', function() {
-      SiteController::home();
-  });
+$routes->get('/', function() {
+    SiteController::home();
+});
 
-  $routes->get('/hiekkalaatikko', function() {
+$routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
-  });
+});
 
 $routes->get('/categories', function() {
     HelloWorldController::categorylisting();
@@ -21,7 +21,7 @@ $routes->get('/recipes', function() {
 });
 
 $routes->post('/recipes', function() {
-  RecipeController::store();
+    RecipeController::store();
 });
 
 $routes->get('/recipes/addrecipe', function() {
@@ -50,7 +50,7 @@ $routes->get('/login', function() {
 
 $routes->post('/login', function() {
     UserController::handle_login();
-}); 
+});
 
 $routes->post('/logout', function() {
     UserController::logout();
@@ -60,6 +60,9 @@ $routes->post('/recipepage/:id', function($id) {
     ReviewController::store($id);
 });
 
+$routes->post('/recipepage/:id/destroyreview/:reviewid', function($id, $reviewid) {
+    ReviewController::delete($id, $reviewid);
+});
 
 
 

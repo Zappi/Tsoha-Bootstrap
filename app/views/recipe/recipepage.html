@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% block content %} 
+{% extends "base.html" %} {% block content %} {% import "macros/forms.html" as forms %}
 
 {% if message %}
 
@@ -51,13 +51,27 @@
 
 <h3>Kommentit</h3>
 
-<ul class="list-unstyled">
-    {% for review in reviews %}
-    <li> <strong>Kommentti:</strong> {{review.message}} <br> Lähettäjä: {{review.username}} </li>
-    <br>
-    
-    {% endfor %}
-</ul>
+<div class="commentsection">
+    <ul class="list-unstyled">
+        {% for review in reviews %}
+        <li> <strong>Kommentti:</strong> {{review.message}} <br> Lähettäjä: {{review.username}} </li>
+        
+       
+        
+        <p>
+            {{forms.edit_button_smaller("#{base_path}/recipepage/#{recipe.id}/edit")}}
+            
+            {{forms.destroy_button_smaller("#{base_path}/recipepage/#{recipe.id}/destroyreview/#{review.id}")}}
+            
+            
+        </p>
+        
+        
+        <br>
+
+        {% endfor %}
+    </ul>
+</div>
 
 
 
@@ -70,7 +84,7 @@
         <button type="submit" class="btn btn-primary">Lähetä</button>
         {% else %}
         <div class="alert alert-info">
-        <strong>Huom!</strong> Sinun tulee olla kirjautunut sisään kommentointia varten!
+            <strong>Huom!</strong> Sinun tulee olla kirjautunut sisään kommentointia varten!
         </div>
         {% endif %}
     </div>

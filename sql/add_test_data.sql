@@ -32,7 +32,7 @@ INSERT INTO Category (categoryname) VALUES ('Jälkiruoat');
 INSERT INTO Member (username, password, email, registered, admin) VALUES ('Zappi', 'jeejee', 'jerry@zappi.fi', true, true);
 
 
-INSERT INTO Recipe (category_id, name, addtime, method, username) VALUES (2, 'Maksalaatikko', CURRENT_TIMESTAMP, 'Sekoita ja paista uunissa','Zappi');
+INSERT INTO Recipe (category_id, member_id, name, addtime, method, username) VALUES (2, 1, 'Maksalaatikko', CURRENT_TIMESTAMP, 'Sekoita ja paista uunissa','Zappi');
 
 INSERT INTO RecipeIngredient (recipe_id, ingredient_id, amount) VALUES (1,1, '2kpl');
 INSERT INTO RecipeIngredient (recipe_id, ingredient_id, amount) VALUES (1,2, '400g');

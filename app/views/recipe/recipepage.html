@@ -54,9 +54,10 @@
 <div class="commentsection">
     <ul class="list-unstyled">
         {% for review in reviews %}
-        <li> <strong>Kommentti:</strong> {{review.message}} <br> Lähettäjä: {{review.username}} </li>
+        <li> <strong>Kommentti:</strong> {{review.message}} <br> Lähettäjä: {{review.username}} Lähetysaika {{review.addtime|date}} </li>
         
        
+        {%if user_logged_in %}
         
         <p>
             {{forms.edit_button_smaller("#{base_path}/recipepage/#{recipe.id}/editreview/#{review.id}")}}
@@ -66,6 +67,7 @@
             
         </p>
         
+        {% endif %}
         
         <br>
 

@@ -1,0 +1,18 @@
+{% extends "base.html" %} {% block content %}
+
+{% if recipes != null %} 
+
+<h2> Kaikki kategorian {{category.categoryname}} </h2>
+
+{% else %}
+
+<h2> Kategorialla {{category.categoryname}} ei ole yhtään resepetiä! </h2>
+
+{% endif %}
+
+
+
+
+<p> Test </p>
+
+{% endblock %}

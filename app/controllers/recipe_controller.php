@@ -20,6 +20,17 @@ class RecipeController extends BaseController {
 
         View::make('recipe/recipepage.html', array('recipe' => $recipe, 'category' => $category, 'reviews' => $reviews));
     }
+    
+    public static function showRecipesWithSameCategory($category_id) {
+        $recipes = Recipe::findAllWithSameCategory($category_id);
+        $categoryName = Category::find($category_id)->categoryname;
+        
+        if($recipes==null) {
+            $recipes = "Tällä kategorialla ei ole vielä yhtään reseptiä";
+        }
+        
+        View::make('categorylisting.html', array('recipes' => $recipes, 'category' => $categoryName));
+    }
 
     public static function create() {
         self::check_logged_in();
@@ -97,6 +108,7 @@ class RecipeController extends BaseController {
         $category = $params['category'];
 
         $attributes = array(
+            'id' => $id,
             'category_id' => $category,
             'name' => $params['name'],
             'method' => $params['method'],
@@ -104,7 +116,7 @@ class RecipeController extends BaseController {
         );
 
         $recipe = new Recipe($attributes);
-        $recipe->id = $id;
+        //$recipe->id = $id;
         $recipe->update();
 
         $errors = $recipe->errors();
@@ -131,8 +143,10 @@ class RecipeController extends BaseController {
         self::check_logged_in();
         $recipe = new Recipe(array('id' => $id));
         $recipeIngredient = new RecipeIngredient(array('recipe_id' => $id));
+        $reviews = new Review(array('recipe_id' => $id));
 
         $recipeIngredient->destroy();
+        $reviews->destroyAllRecipeReviews();
         $recipe->destroy();
 
         Redirect::to('/recipes');

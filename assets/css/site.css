@@ -13,3 +13,8 @@
     text-align: center;
 }
 
+.error-input {
+    text-decoration: none;
+    font-weight: bold;
+}
+

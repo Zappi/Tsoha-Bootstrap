@@ -2,12 +2,12 @@
 
 class Recipe extends BaseModel {
 
-    public $id, $member_id, $category_id, $name, $addtime, $method, $username,$ingredient, $ingredientname;
+    public $id, $member_id, $category_id, $name, $addtime, $method, $username, $ingredient, $ingredientname;
 
     //Konstruktori
     public function __construct($attributes) {
         parent::__construct($attributes);
-         $this->validators = array('validate_name', 'validate_string_length');
+        $this->validators = array('validate_name', 'validate_string_length');
     }
 
     public static function all() {
@@ -29,6 +29,28 @@ class Recipe extends BaseModel {
             ));
         }
         return $recipes;
+    }
+
+    public static function findAllWithSameCategory($category_id) {
+
+        $query = DB::connection()->prepare('SELECT * FROM Recipe WHERE category_id = :category_id');
+        $query->execute(array('category_id' => $category_id));
+        $row = $query->fetchAll();
+
+        if ($row) {
+            $recipes[] = new Recipe(array(
+                //'id' => $row['id'],
+                //'member_id' => $row['member_id'],
+                'category_id' => $row['category_id'],
+                'name' => $row['name'],
+                'addtime' => $row['addtime'],
+                'method' => $row['method'],
+                'username' => $row['username'],
+            ));
+            
+            return $recipes;
+        }
+        return null;
     }
 
     public static function find($id) {
@@ -136,11 +158,11 @@ class Recipe extends BaseModel {
         $errors[] = parent::validate_name($this->method, 'Resepti');
         return $errors;
     }
-    
+
     public function validate_string_length() {
         $errors = array();
-        $errors[] = parent::validate_string_length($this->name,'Reseptin nimen', 4);
-        $errors[] = parent::validate_string_length($this->method,'Reseptin', 10);
+        $errors[] = parent::validate_string_length($this->name, 'Reseptin nimen', 4);
+        $errors[] = parent::validate_string_length($this->method, 'Reseptin', 10);
         return $errors;
     }
 

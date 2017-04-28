@@ -9,7 +9,11 @@ $routes->get('/hiekkalaatikko', function() {
 });
 
 $routes->get('/categories', function() {
-    HelloWorldController::categorylisting();
+    CategoryController::findAllForCategoryPage();
+});
+
+$routes->get('/categories/:category_id', function($category_id) {
+    RecipeController::showRecipesWithSameCategory($category_id);
 });
 
 $routes->get('/register', function() {
@@ -70,7 +74,9 @@ $routes->get('/recipepage/:id/editreview/:reviewid', function($id, $reviewid) {
 
 $routes->post('/recipepage/:id/editreview/:reviewid', function($id, $reviewid) {
     ReviewController::update($id, $reviewid);
-});  
+});
+
+
 
 
 

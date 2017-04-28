@@ -38,7 +38,7 @@ class ReviewController extends BaseController {
     
     public static function edit($id) {
         $review = Review::find($id);
-        View::make('reviewedit.html', array('attributes' => $review));
+        View::make('reviewedit.html', array('review' => $review));
     }
     
     public static function update($id, $reviewid) {
@@ -47,12 +47,12 @@ class ReviewController extends BaseController {
         
         $attributes = array( 
             'id' => $id,
+            'addtime' => CURRENT_TIMESTAMP(),
             'message' => $params['message']
         );
         
         $review = new Review($attributes);
         $review->id = $reviewid;
-        $review->update();
         
         
         $errors = $review->errors();
@@ -60,7 +60,8 @@ class ReviewController extends BaseController {
         if(count($errors) > 0) {
             View::make('reviewedit.html', array('errors' => $errors, 'attributes' => $attributes));
         } else {
-            Redirect::to('/recipepage/' . $id, array('message' => 'Kommenttia muokattu onnistuneesti!'));
+           $review->update();
+           Redirect::to('/recipepage/' . $id, array('message' => 'Kommenttia muokattu onnistuneesti!'));
         }
     }
 }

@@ -56,6 +56,11 @@ class Review extends BaseModel {
         $query->execute(array('id' => $this->id));
     }
     
+    public function destroyAllRecipeReviews() {
+        $query = DB::connection()->prepare('DELETE FROM Review WHERE recipe_id = :id');
+        $query->execute(array('id' => $this->recipe_id));
+    }
+    
     
     public function validate_name() {
         $errors = array();
@@ -71,8 +76,10 @@ class Review extends BaseModel {
     }
     
     public function update() {
-        $query = DB::connection()->prepare('UPDATE Review SET message = :message');
+        $query = DB::connection()->prepare('UPDATE Review SET addtime = :addtime, message = :message WHERE id = :id ');
         $query->execute(array (
+            'id' => $this->id,
+            'addtime' => $this->addtime,
             'message' => $this->message));
     }
 }

@@ -9,7 +9,9 @@ class CategoryController extends BaseController{
         View::make('/recipe/addrecipe.html', array('categories' => $categories));
     }
     
-    public static function create() {
+    public static function findAllForCategoryPage() {
         
+        $categories = Category::all();
+        View::make('/categories.html', array('categories' =>  $categories));
     }
 }

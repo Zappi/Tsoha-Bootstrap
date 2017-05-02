@@ -23,13 +23,9 @@ class RecipeController extends BaseController {
     
     public static function showRecipesWithSameCategory($category_id) {
         $recipes = Recipe::findAllWithSameCategory($category_id);
-        $categoryName = Category::find($category_id)->categoryname;
+        $category = Category::find($category_id)->categoryname;
         
-        if($recipes==null) {
-            $recipes = "Tällä kategorialla ei ole vielä yhtään reseptiä";
-        }
-        
-        View::make('categorylisting.html', array('recipes' => $recipes, 'category' => $categoryName));
+        View::make('categorylisting.html', array('recipes' => $recipes, 'category' => $category));
     }
 
     public static function create() {

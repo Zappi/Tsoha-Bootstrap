@@ -35,22 +35,23 @@ class Recipe extends BaseModel {
 
         $query = DB::connection()->prepare('SELECT * FROM Recipe WHERE category_id = :category_id');
         $query->execute(array('category_id' => $category_id));
-        $row = $query->fetchAll();
+        $rows = $query->fetchAll();
 
-        if ($row) {
+        foreach ($rows as $row) {
             $recipes[] = new Recipe(array(
-                //'id' => $row['id'],
-                //'member_id' => $row['member_id'],
-                'category_id' => $row['category_id'],
+                'id' => $row['id'],
+                'member_id' => $row['member_id'],
+                'category_id' => $category_id,
                 'name' => $row['name'],
                 'addtime' => $row['addtime'],
                 'method' => $row['method'],
                 'username' => $row['username'],
             ));
-            
             return $recipes;
         }
-        return null;
+            
+            return null;
+        
     }
 
     public static function find($id) {

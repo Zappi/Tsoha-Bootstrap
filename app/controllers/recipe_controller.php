@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 class RecipeController extends BaseController {
 
@@ -23,9 +23,11 @@ class RecipeController extends BaseController {
     
     public static function showRecipesWithSameCategory($category_id) {
         $recipes = Recipe::findAllWithSameCategory($category_id);
-        $category = Category::find($category_id)->categoryname;
+        $category = Category::find($category_id);
         
-        View::make('categorylisting.html', array('recipes' => $recipes, 'category' => $category));
+        $recipecount = count($recipes);
+        
+        View::make('categorylisting.html', array('recipes' => $recipes, 'category' => $category, 'recipecount' => $recipecount));
     }
 
     public static function create() {
@@ -52,7 +54,14 @@ class RecipeController extends BaseController {
             'username' => self::get_user_logged_in()->username
         );
         $recipe = new Recipe($attributes);
+        
+        $errors = $recipe->errors();
+        if (count($errors) > 0) {
+            View::make('recipe/addrecipe.html', array('errors' => $errors, 'ingredients' => Ingredient::all(), 'categories' => Category::all()));
+        } else {
+
         $recipe->save();
+        }
         $ingredients = $params['ingredients'];
         $amounts = $params['amounts'];
 
@@ -111,6 +120,7 @@ class RecipeController extends BaseController {
             'username' => self::get_user_logged_in()->username
         );
 
+        
         $recipe = new Recipe($attributes);
         //$recipe->id = $id;
         $recipe->update();
@@ -146,5 +156,18 @@ class RecipeController extends BaseController {
         $recipe->destroy();
 
         Redirect::to('/recipes');
+    }
+    
+    public static function getAttributes($id) {
+        $attributes = array(
+            'id' => $id,
+            'category_id' => $category,
+            'name' => $params['name'],
+            'method' => $params['method'],
+            'username' => self::get_user_logged_in()->username
+        );
+
+        
+        $recipe = new Recipe($attributes);
     }
 }

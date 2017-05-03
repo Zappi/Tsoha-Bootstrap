@@ -2,7 +2,7 @@
 
 {% if recipes != null %} 
 
-<h2> Kaikki kategorian {{category.categoryname}} </h2>
+<h2> Kategorialla <span class="lowercase">{{category.categoryname}}</span> löytyi {{recipecount}} reseptiä. </h2>
 
 <table class="table table-striped table-bordered">
     <thead>
@@ -24,7 +24,7 @@
 
 {% else %}
 
-<h2> Kategorialla {{category.categoryname}} ei ole yhtään resepetiä! </h2>
+<h2> Kategorialla <span class="lowercase">{{category.categoryname}}</span> ei ole yhtään resepetiä! </h2>
 
 {% endif %}
 

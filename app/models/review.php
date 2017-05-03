@@ -6,7 +6,27 @@ class Review extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name', 'validate_string_length');
+        $this->validators = array('validate_name', 'validate_string_length', 'validate_max_string_length');
+    }
+    
+    public static function findSingleReview($id, $reviewid) {
+        $query = DB::connection()->prepare('SELECT * FROM Review WHERE id = :reviewid');
+        $query->execute(array($reviewid));
+        $row = $query->fetch();
+        
+        if($row) {
+            $review = new Review(array(
+                'id' => $row['id'],
+                'member_id' => $row['member_id'],
+                'recipe_id' => $row['recipe_id'],
+                'username' => $row['username'],
+                'addtime' => $row['addtime'],
+                'message' => $row['message']
+            ));
+            return $review;
+        }
+        
+        return null;
     }
 
     public static function find($recipe_id) {
@@ -72,6 +92,12 @@ class Review extends BaseModel {
         $errors = array();
         $errors[] = parent::validate_string_length($this->message,'Kommentin', 5);
         
+        return $errors;
+    }
+    
+    public function validate_max_string_length() {
+        $errors = array();
+        $errors[] = parent::validate_max_string_length($this->message, 'Kommentin', 400);
         return $errors;
     }
     

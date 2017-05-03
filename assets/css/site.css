@@ -18,3 +18,11 @@
     font-weight: bold;
 }
 
+.lowercase {
+    text-transform: lowercase;
+    font-weight: bold;
+}
+
+#recipe-method {
+    text-align: left;
+}

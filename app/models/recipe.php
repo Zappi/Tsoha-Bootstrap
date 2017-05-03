@@ -7,7 +7,7 @@ class Recipe extends BaseModel {
     //Konstruktori
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name', 'validate_string_length');
+        $this->validators = array('validate_name', 'validate_string_length', 'validate_max_string_length');
     }
 
     public static function all() {
@@ -47,10 +47,14 @@ class Recipe extends BaseModel {
                 'method' => $row['method'],
                 'username' => $row['username'],
             ));
-            return $recipes;
+           
+        }
+        
+        if($rows == null) {
+            return null;
         }
             
-            return null;
+        return $recipes;
         
     }
 
@@ -162,8 +166,15 @@ class Recipe extends BaseModel {
 
     public function validate_string_length() {
         $errors = array();
-        $errors[] = parent::validate_string_length($this->name, 'Reseptin nimen', 4);
-        $errors[] = parent::validate_string_length($this->method, 'Reseptin', 10);
+        $errors[] = parent::validate_string_length($this->name, 'Reseptin nimen ', 4);
+        $errors[] = parent::validate_string_length($this->method, 'Reseptin ', 10);
+        return $errors;
+    }
+    
+    public function validate_max_string_length() {
+        $errors = array();
+        $errors[] = parent::validate_max_string_length($this->name, 'Reseptin nimen', 30);
+        $errors[] = parent::validate_max_string_length($this->method, 'Reseptin', 4000);
         return $errors;
     }
 

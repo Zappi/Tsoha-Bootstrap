@@ -44,5 +44,15 @@
         return $error;
     }
     
+    public function validate_max_string_length($name, $varName, $length) {
+        $error = null;
+        
+        if(strlen($name) > $length) {
+            $error = $varName . ' pituus voi olla maksimissaan ' . $length . ' merkkiä pitkä';
+        }
+        
+        return $error;
+    }
+    
 
   }

@@ -36,8 +36,8 @@ class ReviewController extends BaseController {
         Redirect::to('/recipepage/' . $recipeid);
     }
     
-    public static function edit($id) {
-        $review = Review::find($id);
+    public static function edit($id, $reviewid) {
+        $review = Review::findSingleReview($id, $reviewid);
         View::make('reviewedit.html', array('review' => $review));
     }
     
@@ -47,7 +47,6 @@ class ReviewController extends BaseController {
         
         $attributes = array( 
             'id' => $id,
-            'addtime' => CURRENT_TIMESTAMP(),
             'message' => $params['message']
         );
         

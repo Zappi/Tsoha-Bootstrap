@@ -7,15 +7,14 @@
 </div>
 {% endif %}
 
-{% if errors %} 
-<div class="alert alert-danger error-input">
-    <ul>
-        {% for error in errors %} 
-        <li>{{error}}</li>
-        {% endfor %}
-    </ul>
+{% if errors %}
+<div class="alert alert-danger">
+    {% for error in errors %}
+    {{error}}<br />
+    {% endfor %}
 </div>
 {% endif %}
+
 
 
 <h1> {{recipe.name}}</h1>

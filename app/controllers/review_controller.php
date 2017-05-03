@@ -24,7 +24,7 @@ class ReviewController extends BaseController {
             $review->save();
             Redirect::to('/recipepage/' . $id, array('message' => 'Kommentti lisätty onnistuneesti.'));
         } else {
-            Redirect::to('/recipepage/' . $id, array('errors' => $errors));
+             View::make('reviewedit.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
     

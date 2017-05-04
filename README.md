@@ -11,15 +11,15 @@ Työn aiheena on tehdä sivusto, johon käyttäjät voivat lisätä omia ruokare
 
 ## Linkit
 
-*[Etusivu](http://jtamland.users.cs.helsinki.fi/reseptisivusto/)
-*[Kategorialistaus](http://jtamland.users.cs.helsinki.fi/reseptisivusto/categories/)
-*[Reseptin lisäys](http://jtamland.users.cs.helsinki.fi/reseptisivusto/addreceipe/)
-*[Reseptisivu](http://jtamland.users.cs.helsinki.fi/reseptisivusto/receipepage/)
-*[Sisäänkirjautuminen](http://jtamland.users.cs.helsinki.fi/reseptisivusto/login/)
-*[Rekisteröitymissivu](http://jtamland.users.cs.helsinki.fi/reseptisivusto/register/)
+* [Etusivu](http://jtamland.users.cs.helsinki.fi/reseptisivusto/)
+* [Kategorialistaus](http://jtamland.users.cs.helsinki.fi/reseptisivusto/categories/)
+* [Reseptin lisäys](http://jtamland.users.cs.helsinki.fi/reseptisivusto/addreceipe/)
+* [Reseptisivu](http://jtamland.users.cs.helsinki.fi/reseptisivusto/receipepage/)
+* [Sisäänkirjautuminen](http://jtamland.users.cs.helsinki.fi/reseptisivusto/login/)
+* [Rekisteröitymissivu](http://jtamland.users.cs.helsinki.fi/reseptisivusto/register/)
 
 
-##Käyttäjätunnus sivun testaamista varten
+## Käyttäjätunnus sivun testaamista varten
 
 Käyttäjätunnus: Zappi
 Salasana: jeejee

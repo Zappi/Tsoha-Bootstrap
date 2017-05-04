@@ -12,6 +12,6 @@ class CategoryController extends BaseController{
     public static function findAllForCategoryPage() {
         
         $categories = Category::all();
-        View::make('/categories.html', array('categories' =>  $categories));
+        View::make('categories/categories.html', array('categories' =>  $categories));
     }
 }

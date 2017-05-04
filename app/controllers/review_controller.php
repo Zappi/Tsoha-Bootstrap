@@ -24,7 +24,7 @@ class ReviewController extends BaseController {
             $review->save();
             Redirect::to('/recipepage/' . $id, array('message' => 'Kommentti lisätty onnistuneesti.'));
         } else {
-             View::make('reviewedit.html', array('errors' => $errors, 'attributes' => $attributes));
+             View::make('reviews/reviewedit.html', array('errors' => $errors, 'attributes' => $attributes));
         }
     }
     
@@ -38,7 +38,7 @@ class ReviewController extends BaseController {
     
     public static function edit($id, $reviewid) {
         $review = Review::findSingleReview($id, $reviewid);
-        View::make('reviewedit.html', array('review' => $review));
+        View::make('reviews/reviewedit.html', array('review' => $review));
     }
     
     public static function update($id, $reviewid) {
@@ -57,7 +57,7 @@ class ReviewController extends BaseController {
         $errors = $review->errors();
         
         if(count($errors) > 0) {
-            View::make('reviewedit.html', array('errors' => $errors, 'attributes' => $attributes));
+            View::make('reviews/reviewedit.html', array('errors' => $errors, 'attributes' => $attributes));
         } else {
            $review->update();
            Redirect::to('/recipepage/' . $id, array('message' => 'Kommenttia muokattu onnistuneesti!'));
